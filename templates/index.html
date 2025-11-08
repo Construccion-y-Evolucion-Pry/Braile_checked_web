@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Texto a Braille</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Conversor de Texto a Braille</h1>
+            <p class="subtitle">Convierte cualquier texto a símbolos Braille</p>
+        </header>
+
+        <main>
+            <div class="converter-section">
+                <div class="input-section">
+                    <label for="texto-input">
+                        <h2>Texto Original</h2>
+                    </label>
+                    <textarea 
+                        id="texto-input" 
+                        placeholder="Escribe aquí el texto que quieres convertir a Braille..."
+                        rows="6"
+                    ></textarea>
+                    <button id="convertir-btn" class="btn-primary">
+                        Convertir a Braille ⚡
+                    </button>
+                </div>
+
+                <div class="output-section">
+                    <h2>Texto en Braille</h2>
+                    <div id="braille-output" class="braille-display">
+                        <p class="placeholder">El texto en Braille aparecerá aquí...</p>
+                    </div>
+                    <button id="copiar-btn" class="btn-secondary" style="display: none;">
+                        📋 Copiar Braille
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>ℹ️ Información sobre Braille</h3>
+                <p>
+                    El sistema Braille es un sistema de escritura táctil utilizado por personas ciegas 
+                    o con discapacidad visual. Fue creado por Louis Braille en 1824 y utiliza patrones 
+                    de puntos en relieve para representar letras, números y símbolos.
+                </p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Desarrollado para ayudar en la accesibilidad 💙</p>
+        </footer>
+    </div>
+
+    <script>
+        const textoInput = document.getElementById('texto-input');
+        const convertirBtn = document.getElementById('convertir-btn');
+        const brailleOutput = document.getElementById('braille-output');
+        const copiarBtn = document.getElementById('copiar-btn');
+
+        convertirBtn.addEventListener('click', async () => {
+            const texto = textoInput.value.trim();
+            
+            if (!texto) {
+                alert('Por favor, escribe algo de texto para convertir.');
+                return;
+            }
+
+            try {
+                convertirBtn.disabled = true;
+                convertirBtn.textContent = 'Convirtiendo...';
+
+                const response = await fetch('/convertir', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ texto: texto })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    brailleOutput.innerHTML = `<p class="braille-text">${data.texto_braille}</p>`;
+                    copiarBtn.style.display = 'block';
+                } else {
+                    brailleOutput.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                }
+            } catch (error) {
+                brailleOutput.innerHTML = `<p class="error">Error al convertir: ${error.message}</p>`;
+            } finally {
+                convertirBtn.disabled = false;
+                convertirBtn.textContent = 'Convertir a Braille ⚡';
+            }
+        });
+
+        copiarBtn.addEventListener('click', () => {
+            const brailleText = brailleOutput.querySelector('.braille-text');
+            if (brailleText) {
+                navigator.clipboard.writeText(brailleText.textContent)
+                    .then(() => {
+                        const originalText = copiarBtn.textContent;
+                        copiarBtn.textContent = '✅ ¡Copiado!';
+                        setTimeout(() => {
+                            copiarBtn.textContent = originalText;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        alert('Error al copiar: ' + err);
+                    });
+            }
+        });
+
+        // Permitir conversión con Enter (Ctrl+Enter para nueva línea)
+        textoInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                e.preventDefault();
+                convertirBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
