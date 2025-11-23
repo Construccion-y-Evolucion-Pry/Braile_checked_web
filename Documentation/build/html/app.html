@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Módulo app &mdash; documentación de Conversor de Texto a Braille - 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=36c4ab74"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=f85f4cfb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="prev" title="Referencia de la API" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Conversor de Texto a Braille
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentación:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduccion.html">Introducción</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduccion.html#que-es-el-sistema-braille">¿Qué es el Sistema Braille?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduccion.html#sobre-este-proyecto">Sobre este Proyecto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduccion.html#objetivos">Objetivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduccion.html#tecnologias-utilizadas">Tecnologías Utilizadas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduccion.html#caracteristicas-del-sistema-braille-implementado">Características del Sistema Braille Implementado</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="instalacion.html">Instalación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html#requisitos-previos">Requisitos Previos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html#instalacion-paso-a-paso">Instalación Paso a Paso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="instalacion.html#clonar-el-repositorio">1. Clonar el Repositorio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="instalacion.html#crear-un-entorno-virtual">2. Crear un Entorno Virtual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="instalacion.html#activar-el-entorno-virtual">3. Activar el Entorno Virtual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="instalacion.html#instalar-las-dependencias">4. Instalar las Dependencias</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html#verificacion-de-la-instalacion">Verificación de la Instalación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html#configuracion-adicional">Configuración Adicional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html#solucion-de-problemas-comunes">Solución de Problemas Comunes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uso.html">Uso de la Aplicación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uso.html#iniciar-el-servidor">Iniciar el Servidor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uso.html#interfaz-web">Interfaz Web</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#conversion-de-texto">Conversión de Texto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#copiar-resultado">Copiar Resultado</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#atajos-de-teclado">Atajos de Teclado</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uso.html#ejemplos-de-uso">Ejemplos de Uso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#ejemplo-1-texto-simple">Ejemplo 1: Texto Simple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#ejemplo-2-texto-con-numeros">Ejemplo 2: Texto con Números</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#ejemplo-3-texto-con-puntuacion">Ejemplo 3: Texto con Puntuación</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uso.html#uso-programatico-api">Uso Programático (API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#endpoint-de-conversion">Endpoint de Conversión</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#ejemplo-con-curl">Ejemplo con cURL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#ejemplo-con-python">Ejemplo con Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#ejemplo-con-javascript">Ejemplo con JavaScript</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="uso.html#detener-el-servidor">Detener el Servidor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">Referencia de la API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#endpoints-disponibles">Endpoints Disponibles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#get">GET /</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#post-convertir">POST /convertir</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#parametros-de-entrada">Parámetros de Entrada</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#respuestas">Respuestas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#ejemplos-completos">Ejemplos Completos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#usando-curl">Usando cURL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#usando-python-requests">Usando Python (requests)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#usando-javascript-fetch">Usando JavaScript (fetch)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#limitaciones-y-consideraciones">Limitaciones y Consideraciones</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#caracteres-soportados">Caracteres Soportados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#caracteres-no-soportados">Caracteres No Soportados</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#manejo-de-mayusculas">Manejo de Mayúsculas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#limites-de-tamano">Límites de Tamaño</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#cors">CORS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Módulo app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#app.texto_a_braille"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app.convertir"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funciones">Funciones</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rutas-de-la-aplicacion">Rutas de la aplicación</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#variables-globales">Variables globales</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Conversor de Texto a Braille</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Módulo app</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/app.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-app">
+<span id="modulo-app"></span><h1>Módulo app<a class="headerlink" href="#module-app" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="app.texto_a_braille">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">texto_a_braille</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#texto_a_braille"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#app.texto_a_braille" title="Link to this definition"></a></dt>
+<dd><p>Convierte texto normal a símbolos Braille.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>texto</strong> (<em>str</em>) – El texto a convertir</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>El texto convertido a símbolos Braille</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.index">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#index"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#app.index" title="Link to this definition"></a></dt>
+<dd><p>Ruta principal que muestra la interfaz.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.convertir">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">convertir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#convertir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#app.convertir" title="Link to this definition"></a></dt>
+<dd><p>Endpoint para convertir texto a Braille.
+Espera un JSON con el campo “texto”.</p>
+</dd></dl>
+
+<section id="funciones">
+<h2>Funciones<a class="headerlink" href="#funciones" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">texto_a_braille</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#texto_a_braille"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Convierte texto normal a símbolos Braille.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>texto</strong> (<em>str</em>) – El texto a convertir</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>El texto convertido a símbolos Braille</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rutas-de-la-aplicacion">
+<h2>Rutas de la aplicación<a class="headerlink" href="#rutas-de-la-aplicacion" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#index"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Ruta principal que muestra la interfaz.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">convertir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#convertir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Endpoint para convertir texto a Braille.
+Espera un JSON con el campo “texto”.</p>
+</dd></dl>
+
+</section>
+<section id="variables-globales">
+<h2>Variables globales<a class="headerlink" href="#variables-globales" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="app.BRAILLE_MAP">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">BRAILLE_MAP</span></span><a class="headerlink" href="#app.BRAILLE_MAP" title="Link to this definition"></a></dt>
+<dd><p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object’s</p>
+<blockquote>
+<div><p>(key, value) pairs</p>
+</div></blockquote>
+<dl>
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt><dd><p>d = {}
+for k, v in iterable:</p>
+<blockquote>
+<div><p>d[k] = v</p>
+</div></blockquote>
+</dd>
+<dt>dict(<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt><dd><p>in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="api.html" class="btn btn-neutral float-left" title="Referencia de la API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2025, Equipo de Desarrollo.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
