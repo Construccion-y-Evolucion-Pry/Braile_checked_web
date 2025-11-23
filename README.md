@@ -94,7 +94,7 @@ Este proyecto incluye documentación completa generada con **Sphinx**.
 La documentación HTML ya está generada. Abre en tu navegador:
 
 ```
-Documentation/build/html/index.html
+start Documentation/build/html/index.html
 ```
 
 ### Regenerar la Documentación
