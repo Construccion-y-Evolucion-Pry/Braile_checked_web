@@ -15,19 +15,20 @@ BRAILLE_MAP = {
     'ñ': '⠻',
 
     # Vocales con tilde: signo de acento ⠬ + vocal
-    'á': '⠬⠁',
-    'é': '⠬⠑',
-    'í': '⠬⠊',
-    'ó': '⠬⠕',
-    'ú': '⠬⠥',
+    'á': '⠷',
+    'é': '⠮',
+    'í': '⠌',
+    'ó': '⠬',
+    'ú': '⠾',
 
     'ü': '⠳',
 
     # Espacios y signos
     ' ': '⠀',
     '.': '⠲', ',': '⠂', ';': '⠆', ':': '⠒',
-    '!': '⠖', '?': '⠦', '-': '⠤',
-    '(': '⠐⠣', ')': '⠐⠜'
+    '!': '⠖', '¡': '⠖', '?': '⠦', '-': '⠤',
+    '(': '⠐⠣', ')': '⠐⠜', '¿': '⠦',
+    '\n': '\n'  # Preservar saltos de línea
 }
 
 # Números en braille español (1–0)
@@ -71,6 +72,16 @@ def texto_a_braille(texto):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/contexto')
+def contexto():
+    return render_template('contexto.html')
+
+
+@app.route('/sobre-nosotros')
+def sobre_nosotros():
+    return render_template('sobre-nosotros.html')
 
 
 @app.route('/convertir', methods=['POST'])
