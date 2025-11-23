@@ -14,21 +14,49 @@ BRAILLE_MAP = {
     # Caracteres especiales del español
     'ñ': '⠻',
 
-    # Vocales con tilde: signo de acento ⠬ + vocal
+    # Vocales con tilde
     'á': '⠷',
     'é': '⠮',
     'í': '⠌',
     'ó': '⠬',
     'ú': '⠾',
-
     'ü': '⠳',
 
-    # Espacios y signos
+    # Espacios y signos de puntuación básicos
     ' ': '⠀',
-    '.': '⠲', ',': '⠂', ';': '⠆', ':': '⠒',
-    '!': '⠖', '¡': '⠖', '?': '⠦', '-': '⠤',
-    '(': '⠐⠣', ')': '⠐⠜', '¿': '⠦',
-    '\n': '\n'  # Preservar saltos de línea
+    '.': '⠄',      # Punto
+    ',': '⠂',      # Coma
+    ';': '⠆',      # Punto y coma
+    ':': '⠒',      # Dos puntos
+    
+    # Signos de interrogación y exclamación
+    '!': '⠖',      # Exclamación de cierre
+    '¡': '⠖',      # Exclamación de apertura
+    '?': '⠦',      # Interrogación de cierre
+    '¿': '⠦',      # Interrogación de apertura
+    
+    # Guiones y rayas
+    '-': '⠤',      # Guion
+    '_': '⠤',    # Guion bajo
+    
+    # Paréntesis y corchetes
+    '(': '⠣',    # Paréntesis abierto
+    ')': '⠜',    # Paréntesis cerrado
+    
+    # Operadores matemáticos
+    '+': '⠬',      # Más
+    '=': '⠨⠅',    # Igual
+    '×': '⠦',      # Multiplicación
+    '÷': '⠌',      # División
+    '/': '⠸⠌',    # Barra diagonal
+    '*': '⠦',      # Asterisco
+    
+    # Comillas y apóstrofes
+    '"': '⠦',      # Comillas dobles apertura
+    '"': '⠴',      # Comillas dobles cierre
+    
+    # Saltos de línea
+    '\n': '\n',    # Preservar saltos de línea
 }
 
 # Números en braille español (1–0)
@@ -39,6 +67,21 @@ BRAILLE_NUMBERS = {
 
 
 def texto_a_braille(texto):
+    """
+    Convierte texto normal a símbolos Braille español.
+    
+    Args:
+        texto (str): Texto a convertir
+        
+    Returns:
+        str: Texto convertido a símbolos Braille
+        
+    Ejemplos:
+        >>> texto_a_braille("Hola")
+        '⠓⠕⠇⠁'
+        >>> texto_a_braille("4+5=9")
+        '⠼⠙⠬⠼⠑⠨⠅⠼⠊'
+    """
     resultado = []
     numero_activo = False
     numero_buffer = ''
