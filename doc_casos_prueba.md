@@ -1,4 +1,3 @@
-#Cambiar caso 29-26-11
 # Documento de Casos de Prueba
 ## Sistema de Traducción Texto a Braille
 
@@ -109,7 +108,7 @@ Este documento detalla los casos de prueba diseñados para validar la funcionali
 #### CP-011: Mayúscula con Tilde
 - **Descripción:** Verificar combinación de mayúscula inicial con vocal acentuada
 - **Entrada:** `María`
-- **Resultado Esperado:** `⠨⠍⠷⠗⠊⠁`
+- **Resultado Esperado:** `⠨⠍⠁⠗⠌⠁`
 - **Requisito:** Mayúsculas + vocales acentuadas
 - **Prioridad:** Alta
 
@@ -227,7 +226,7 @@ Este documento detalla los casos de prueba diseñados para validar la funcionali
 #### CP-026: Salto de Línea
 - **Descripción:** Verificar preservación de saltos de línea
 - **Entrada:** `línea1\nlínea2`
-- **Resultado Esperado:** `⠇⠌⠝⠑⠁⠁\n⠇⠌⠝⠑⠁⠃`
+- **Resultado Esperado:** `⠇⠌⠝⠑⠁⠼⠁\n⠇⠌⠝⠑⠁⠼`
 - **Requisito:** Preservación de formato
 - **Prioridad:** Media
 
@@ -250,7 +249,7 @@ Este documento detalla los casos de prueba diseñados para validar la funcionali
 #### CP-029: Oración Interrogativa
 - **Descripción:** Verificar oración interrogativa completa
 - **Entrada:** `¿Cuál es tu número?`
-- **Resultado Esperado:** `⠦⠨⠉⠥⠷⠇⠀⠑⠎⠀⠞⠥⠀⠝⠳⠍⠑⠗⠕⠦`
+- **Resultado Esperado:** `⠦⠨⠉⠥⠷⠇⠀⠑⠎⠀⠞⠥⠀⠝⠾⠍⠑⠗⠕⠦`
 - **Requisito:** Generación de señalética
 - **Prioridad:** Alta
 
@@ -297,13 +296,13 @@ Este documento detalla los casos de prueba diseñados para validar la funcionali
 
 ```bash
 # Ejecutar todas las pruebas
-python test_braille_converter.py
+python test_braille.py
 
 # Ejecutar con más detalle
-python -m unittest test_braille_converter.TestBrailleConverter -v
+python -m unittest test_braille.TestBrailleConverter -v
 
 # Ejecutar un caso específico
-python -m unittest test_braille_converter.TestBrailleConverter.test_CP001_primera_serie_minusculas
+python -m unittest test_braille.TestBrailleConverter.test_CP001_primera_serie_minusculas
 ```
 
 ### 4.3 Interpretación de Resultados
@@ -316,13 +315,46 @@ python -m unittest test_braille_converter.TestBrailleConverter.test_CP001_primer
 
 ## 5. Registro de Ejecución
 
-### Plantilla de Registro por Caso de Prueba
+### Registro por Caso de Prueba
 
-| ID | Fecha | Resultado | Observaciones | Ejecutado por |
-|----|-------|-----------|---------------|---------------|
-| CP-001 | | | | |
-| CP-002 | | | | |
-| ... | | | | |
+| ID     | Fecha      | Resultado | Observaciones | Ejecutado por |
+| ------ | ---------- | --------- | ------------- | ------------- |
+| CP-001 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-002 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-003 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-004 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-005 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-006 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-007 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-008 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-009 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-010 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-011 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-012 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-013 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-014 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-015 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-016 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-017 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-018 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-019 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-020 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-021 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-022 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-023 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-024 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-025 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-026 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-027 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-028 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-029 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-030 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-031 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-032 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-033 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-034 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+| CP-035 | 23/11/2025 | OK        | Sin novedades | Equipo QA     |
+
 
 ### Plantilla de Análisis de Fallos
 
@@ -363,6 +395,6 @@ Este conjunto de casos de prueba garantiza la validación completa de los requis
 
 ---
 
-**Preparado por:** [Equipo de Desarrollo]  
-**Revisado por:** [Nombre del Revisor]  
+**Preparado por:** Grupo 5  
+**Revisado por:** Eduardo Arcos  
 **Aprobado por:** [Nombre del Aprobador]
