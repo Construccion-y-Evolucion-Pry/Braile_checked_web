@@ -1,4 +1,31 @@
+<div align="center">
+  <h2>Escuela Politecnica Nacional</h2>
+  <h3>Facultad de Ingeniería de Sistemas</h3>
+  <h4>Construcción y Evolución de Software</h4>
+  
+  <hr width="60%">
+  
+  <br>
+  
+  <table align="center">
+    <tr>
+      <td><b>Versión:</b></td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td><b>Grupo:</b></td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td><b>Fecha:</b></td>
+      <td>Noviembre 2025</td>
+    </tr>
+  </table>
+</div>
 
+<div style="page-break-after: always;"></div>
+
+---
 
 # Ambiente de Desarrollo
 

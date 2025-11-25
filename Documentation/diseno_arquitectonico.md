@@ -1,3 +1,32 @@
+<div align="center">
+  <h2>Escuela Politecnica Nacional</h2>
+  <h3>Facultad de Ingeniería de Sistemas</h3>
+  <h4>Construcción y Evolución de Software</h4>
+  
+  <hr width="60%">
+  
+  <br>
+  
+  <table align="center">
+    <tr>
+      <td><b>Versión:</b></td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td><b>Grupo:</b></td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td><b>Fecha:</b></td>
+      <td>Noviembre 2025</td>
+    </tr>
+  </table>
+</div>
+
+<div style="page-break-after: always;"></div>
+
+---
+
 # Diseño Arquitectónico
 
 ## Resumen
@@ -26,10 +55,11 @@ Esta aplicación es una web simple basada en Flask que convierte texto en símbo
 4. Flask devuelve JSON con `texto_braille`.
 5. Frontend muestra el resultado y ofrece copiar al portapapeles.
 
-## Diagrama (texto)
+## Diagrama de la arquitectura
 
-La siguiente imagen muestra, de forma visual, la disposición de los componentes
-de la aplicación y el flujo de datos entre el cliente y el backend. 
+La siguiente imagen muestra, de forma visual, la disposición de los componentes de la aplicación y el flujo de datos entre el cliente y el backend. 
+
+Para referenciar la arquitectura, se prevé reconstruir a partir del despliegue continuo a posterior del proyecto tal como se espera en el siguiente diagrama.
 
 ![Diagrama de arquitectura](../Documentation/DiseñoArquitectonico.png)
 
