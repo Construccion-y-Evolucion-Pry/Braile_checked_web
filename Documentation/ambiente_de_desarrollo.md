@@ -66,7 +66,7 @@ Manualmente con Sphinx:
 python -m sphinx -b html Documentation/source Documentation/build/html
 ```
 
-Para abrir la documentación generada en Windows:
+Para abrir la documentación generada en Windows como interfaz asimilada de pythondoc:
 
 ```cmd
 start Documentation\\build\\html\\index.html

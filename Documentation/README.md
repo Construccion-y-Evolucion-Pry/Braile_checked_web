@@ -21,7 +21,7 @@ Documentation/
 └── Makefile         # Archivo para compilar en Linux/Mac
 ```
 
-## Generar la Documentación
+## Generar la Documentación desde web (pythondoc)
 
 ### Opción 1: Usando el script automático (Recomendado)
 
@@ -54,7 +54,7 @@ sphinx-build -b html source build/html
 python -m sphinx -b html Documentation/source Documentation/build/html
 ```
 
-## Ver la Documentación
+## Ver la Documentación como apartado de python doc
 
 Una vez generada, abre el archivo:
 

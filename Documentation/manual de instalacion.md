@@ -89,7 +89,7 @@ Proyecto/
 
 Este proyecto incluye documentación completa generada con **Sphinx**.
 
-### Ver la Documentación
+### Ver la Documentación desde el apartado como pythondoc
 
 La documentación HTML ya está generada. Abre en tu navegador:
 
