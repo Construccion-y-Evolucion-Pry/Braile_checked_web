@@ -23,24 +23,72 @@ Interfaz Web
 Conversión de Texto
 ^^^^^^^^^^^^^^^^^^^
 
+La interfaz web de BraiLator ofrece conversión en tiempo real:
+
 1. Abre tu navegador y ve a http://localhost:5000
-2. En el área de texto "Texto Original", escribe el texto que deseas convertir
-3. Haz clic en el botón "Convertir a Braille ⚡"
-4. El texto en Braille aparecerá en el panel derecho "Texto en Braille"
+2. Escribe o pega el texto que deseas convertir en el área de entrada
+3. **La conversión es automática e instantánea** - no necesitas hacer clic en ningún botón
+4. El texto en Braille aparece inmediatamente en la sección "Resultado en Braille"
 
-Copiar Resultado
-^^^^^^^^^^^^^^^^
+.. note::
+   La conversión ocurre mientras escribes. Cada carácter se traduce instantáneamente.
 
-Una vez que el texto ha sido convertido:
+Funcionalidades Adicionales
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Aparecerá un botón "📋 Copiar Braille"
-2. Haz clic en él para copiar el texto en Braille al portapapeles
-3. Podrás pegar el resultado en cualquier otra aplicación
+📋 **Copiar al Portapapeles**
+
+El botón "📋 Copiar" copia el texto en Braille al portapapeles:
+
+1. Una vez que tienes texto convertido, haz clic en "📋 Copiar"
+2. El botón cambiará a "✅ ¡Copiado!" con fondo verde durante 2 segundos
+3. Ahora puedes pegar (Ctrl+V) el texto Braille en cualquier aplicación
+
+**Validación:**
+   Si no hay texto, mostrará la alerta: "⚠️ No hay texto en Braille para copiar"
+
+🖼️ **Exportar como Imagen PNG**
+
+El botón "🖼️ Exportar PNG" genera una imagen profesional:
+
+1. Con texto ya convertido, haz clic en "🖼️ Exportar PNG"
+2. Verás "⏳ Generando..." mientras se procesa
+3. Se descarga automáticamente: ``braille-traduccion-YYYY-MM-DD-HH-MM-SS.png``
+4. El botón mostrará "✅ ¡Exportado!" brevemente
+
+**Contenido de la imagen PNG:**
+
+* Título: "Traducción a Braille"
+* Texto original
+* Traducción en Braille (fuente 32px)
+* Footer: "Generado por BraiLator"
+* Fondo blanco profesional
+
+**Casos de uso:**
+
+* Material educativo
+* Señalética en Braille
+* Presentaciones y documentación
+* Compartir en redes sociales
+* Impresión de referencias
+
+**Validación:**
+   Sin texto mostrará: "⚠️ No hay texto en Braille para exportar"
+
+Navegación
+^^^^^^^^^^
+
+**Secciones disponibles:**
+
+* **Inicio** (``/``): Conversor principal
+* **Contexto** (``/contexto``): Información sobre Braille
+* **Sobre Nosotros** (``/sobre-nosotros``): Equipo de desarrollo
 
 Atajos de Teclado
 ^^^^^^^^^^^^^^^^^
 
-* **Ctrl + Enter** (mientras escribes en el área de texto): Convierte automáticamente el texto sin hacer clic en el botón
+* **Escritura continua**: La conversión es automática, simplemente escribe
+
 
 Ejemplos de Uso
 ---------------

@@ -40,7 +40,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Documentación:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Guías de Usuario</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduccion.html">Introducción</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduccion.html#que-es-el-sistema-braille">¿Qué es el Sistema Braille?</a></li>
@@ -68,7 +68,8 @@
 <li class="toctree-l2"><a class="reference internal" href="uso.html#iniciar-el-servidor">Iniciar el Servidor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uso.html#interfaz-web">Interfaz Web</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#conversion-de-texto">Conversión de Texto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="uso.html#copiar-resultado">Copiar Resultado</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#funcionalidades-adicionales">Funcionalidades Adicionales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#navegacion">Navegación</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#atajos-de-teclado">Atajos de Teclado</a></li>
 </ul>
 </li>
@@ -114,25 +115,29 @@
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentación Técnica</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Módulo app</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.texto_a_braille"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.convertir"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#funciones">Funciones</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id0"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#descripcion-general">Descripción General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#funcion-principal-de-conversion">Función Principal de Conversión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#rutas-de-la-aplicacion-web">Rutas de la Aplicación Web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#api-rest">API REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#variables-globales-y-constantes">Variables Globales y Constantes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app.html#BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#BRAILLE_NUMBERS"><code class="docutils literal notranslate"><span class="pre">BRAILLE_NUMBERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#SIGNO_MAYUSCULA"><code class="docutils literal notranslate"><span class="pre">SIGNO_MAYUSCULA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#SIGNO_NUMERO"><code class="docutils literal notranslate"><span class="pre">SIGNO_NUMERO</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#rutas-de-la-aplicacion">Rutas de la aplicación</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id1"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id2"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#variables-globales">Variables globales</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#app.BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#detalles-de-implementacion">Detalles de Implementación</a></li>
 </ul>
 </li>
 </ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">Recursos Adicionales</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web">Manual de Usuario</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web/issues">Reportar Issues</a></li>
 </ul>
 
         </div>
@@ -162,68 +167,30 @@
 <h1 id="index">Índice</h1>
 
 <div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
- | <a href="#B"><strong>B</strong></a>
- | <a href="#C"><strong>C</strong></a>
- | <a href="#I"><strong>I</strong></a>
- | <a href="#M"><strong>M</strong></a>
- | <a href="#T"><strong>T</strong></a>
+ <a href="#B"><strong>B</strong></a>
+ | <a href="#S"><strong>S</strong></a>
  
 </div>
-<h2 id="A">A</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    app
-
-      <ul>
-        <li><a href="app.html#module-app">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="app.html#app.BRAILLE_MAP">BRAILLE_MAP (en el módulo app)</a>
+      <li><a href="app.html#BRAILLE_MAP">BRAILLE_MAP (variable incorporada)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="app.html#BRAILLE_NUMBERS">BRAILLE_NUMBERS (variable incorporada)</a>
 </li>
   </ul></td>
 </tr></table>
 
-<h2 id="C">C</h2>
+<h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="app.html#app.convertir">convertir() (en el módulo app)</a>, <a href="app.html#id2">[1]</a>
+      <li><a href="app.html#SIGNO_MAYUSCULA">SIGNO_MAYUSCULA (variable incorporada)</a>
 </li>
   </ul></td>
-</tr></table>
-
-<h2 id="I">I</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="app.html#app.index">index() (en el módulo app)</a>, <a href="app.html#id1">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    module
-
-      <ul>
-        <li><a href="app.html#module-app">app</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="T">T</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="app.html#app.texto_a_braille">texto_a_braille() (en el módulo app)</a>, <a href="app.html#id0">[1]</a>
+      <li><a href="app.html#SIGNO_NUMERO">SIGNO_NUMERO (variable incorporada)</a>
 </li>
   </ul></td>
 </tr></table>

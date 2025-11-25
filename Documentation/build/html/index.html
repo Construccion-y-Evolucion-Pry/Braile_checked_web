@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conversor de Texto a Braille &mdash; documentación de Conversor de Texto a Braille - 1.0.0</title>
+  <title>BraiLator - Conversor a Braille &mdash; documentación de Conversor de Texto a Braille - 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -42,7 +42,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Documentación:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Guías de Usuario</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduccion.html">Introducción</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduccion.html#que-es-el-sistema-braille">¿Qué es el Sistema Braille?</a></li>
@@ -70,7 +70,8 @@
 <li class="toctree-l2"><a class="reference internal" href="uso.html#iniciar-el-servidor">Iniciar el Servidor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uso.html#interfaz-web">Interfaz Web</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#conversion-de-texto">Conversión de Texto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="uso.html#copiar-resultado">Copiar Resultado</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#funcionalidades-adicionales">Funcionalidades Adicionales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#navegacion">Navegación</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#atajos-de-teclado">Atajos de Teclado</a></li>
 </ul>
 </li>
@@ -116,25 +117,29 @@
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentación Técnica</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Módulo app</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.texto_a_braille"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.convertir"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#funciones">Funciones</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id0"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#descripcion-general">Descripción General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#funcion-principal-de-conversion">Función Principal de Conversión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#rutas-de-la-aplicacion-web">Rutas de la Aplicación Web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#api-rest">API REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#variables-globales-y-constantes">Variables Globales y Constantes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="app.html#BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#BRAILLE_NUMBERS"><code class="docutils literal notranslate"><span class="pre">BRAILLE_NUMBERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#SIGNO_MAYUSCULA"><code class="docutils literal notranslate"><span class="pre">SIGNO_MAYUSCULA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="app.html#SIGNO_NUMERO"><code class="docutils literal notranslate"><span class="pre">SIGNO_NUMERO</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#rutas-de-la-aplicacion">Rutas de la aplicación</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id1"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id2"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#variables-globales">Variables globales</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#app.BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#detalles-de-implementacion">Detalles de Implementación</a></li>
 </ul>
 </li>
 </ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">Recursos Adicionales</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web">Manual de Usuario</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web/issues">Reportar Issues</a></li>
 </ul>
 
         </div>
@@ -151,7 +156,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Conversor de Texto a Braille</li>
+      <li class="breadcrumb-item active">BraiLator - Conversor a Braille</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
       </li>
@@ -161,26 +166,87 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="conversor-de-texto-a-braille">
-<h1>Conversor de Texto a Braille<a class="headerlink" href="#conversor-de-texto-a-braille" title="Link to this heading"></a></h1>
-<section id="bienvenido-a-la-documentacion-del-conversor-de-texto-a-braille">
-<h2>Bienvenido a la documentación del Conversor de Texto a Braille<a class="headerlink" href="#bienvenido-a-la-documentacion-del-conversor-de-texto-a-braille" title="Link to this heading"></a></h2>
-<p>Una aplicación web desarrollada con Flask que permite convertir texto normal a símbolos Braille Unicode.</p>
+  <section id="brailator-conversor-a-braille">
+<h1>BraiLator - Conversor a Braille<a class="headerlink" href="#brailator-conversor-a-braille" title="Link to this heading"></a></h1>
+<section id="bienvenido-a-la-documentacion-de-brailator">
+<h2>Bienvenido a la documentación de BraiLator<a class="headerlink" href="#bienvenido-a-la-documentacion-de-brailator" title="Link to this heading"></a></h2>
+<p><strong>BraiLator</strong> es una aplicación web desarrollada con Flask que permite convertir texto
+en español a símbolos Braille Unicode de manera rápida, precisa y accesible.</p>
+<img alt="Python 3.7+" src="https://img.shields.io/badge/python-3.7+-blue.svg" />
+<img alt="Flask 3.0.0" src="https://img.shields.io/badge/flask-3.0.0-green.svg" />
 </section>
 <section id="caracteristicas-principales">
-<h2>Características principales<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>✅ Conversión en tiempo real de texto a Braille</p></li>
-<li><p>✅ Soporte para letras (a-z), números (0-9) y símbolos de puntuación</p></li>
-<li><p>✅ Interfaz web moderna y responsiva</p></li>
-<li><p>✅ API REST para conversión programática</p></li>
-<li><p>✅ Función para copiar el texto en Braille al portapapeles</p></li>
+<h2>Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>✅ <strong>Conversión en Tiempo Real</strong></dt><dd><p>Traduce texto a Braille instantáneamente mientras escribes</p>
+</dd>
+<dt>✅ <strong>Soporte Completo del Español</strong></dt><dd><ul class="simple">
+<li><p>Alfabeto completo (a-z) incluyendo ñ</p></li>
+<li><p>Vocales acentuadas (á, é, í, ó, ú, ü)</p></li>
+<li><p>Mayúsculas con prefijo correcto</p></li>
+<li><p>Números y decimales</p></li>
 </ul>
+</dd>
+<dt>✅ <strong>Interfaz Web Moderna</strong></dt><dd><ul class="simple">
+<li><p>Diseño responsivo (funciona en móviles, tablets y desktop)</p></li>
+<li><p>Tema oscuro elegante</p></li>
+<li><p>Conversión instantánea</p></li>
+<li><p>Botones para copiar y exportar</p></li>
+</ul>
+</dd>
+<dt>✅ <strong>Funcionalidades de Exportación</strong></dt><dd><ul class="simple">
+<li><p>📋 Copiar al portapapeles con un clic</p></li>
+<li><p>🖼️ Exportar traducciones como imágenes PNG profesionales</p></li>
+</ul>
+</dd>
+<dt>✅ <strong>API REST</strong></dt><dd><p>Endpoint <code class="docutils literal notranslate"><span class="pre">/convertir</span></code> para integración con otras aplicaciones</p>
+</dd>
+<dt>✅ <strong>Signos y Símbolos</strong></dt><dd><p>Puntuación, operadores matemáticos y caracteres especiales</p>
+</dd>
+</dl>
 </section>
-<section id="indice-de-contenidos">
-<h2>Índice de Contenidos<a class="headerlink" href="#indice-de-contenidos" title="Link to this heading"></a></h2>
+<section id="inicio-rapido">
+<h2>Inicio Rápido<a class="headerlink" href="#inicio-rapido" title="Link to this heading"></a></h2>
+<p><strong>Instalación:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web
+<span class="nb">cd</span><span class="w"> </span>Braile_checked_web
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/Scripts/activate<span class="w">  </span><span class="c1"># En Windows</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p><strong>Ejecutar:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>app.py
+</pre></div>
+</div>
+<p>Luego abre <a class="reference external" href="http://localhost:5000">http://localhost:5000</a> en tu navegador.</p>
+<p><strong>Uso de la API:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://localhost:5000/convertir&#39;</span><span class="p">,</span>
+                        <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;texto&#39;</span><span class="p">:</span> <span class="s1">&#39;Hola mundo&#39;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;texto_braille&#39;</span><span class="p">])</span>
+<span class="c1"># Output: ⠨⠓⠕⠇⠁⠀⠍⠥⠝⠙⠕</span>
+</pre></div>
+</div>
+</section>
+<section id="casos-de-uso">
+<h2>Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>📚 <strong>Educación</strong></dt><dd><p>Material didáctico para enseñanza del sistema Braille</p>
+</dd>
+<dt>🏢 <strong>Señalética</strong></dt><dd><p>Generación de señales en Braille para edificios públicos</p>
+</dd>
+<dt>♿ <strong>Accesibilidad</strong></dt><dd><p>Conversión de documentos y contenido web</p>
+</dd>
+<dt>🔬 <strong>Investigación</strong></dt><dd><p>Herramienta para estudios sobre sistemas de escritura táctil</p>
+</dd>
+</dl>
+</section>
+<section id="contenido-de-la-documentacion">
+<h2>Contenido de la Documentación<a class="headerlink" href="#contenido-de-la-documentacion" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Documentación:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Guías de Usuario</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="introduccion.html">Introducción</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduccion.html#que-es-el-sistema-braille">¿Qué es el Sistema Braille?</a></li>
@@ -208,7 +274,8 @@
 <li class="toctree-l2"><a class="reference internal" href="uso.html#iniciar-el-servidor">Iniciar el Servidor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uso.html#interfaz-web">Interfaz Web</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#conversion-de-texto">Conversión de Texto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="uso.html#copiar-resultado">Copiar Resultado</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#funcionalidades-adicionales">Funcionalidades Adicionales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#navegacion">Navegación</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#atajos-de-teclado">Atajos de Teclado</a></li>
 </ul>
 </li>
@@ -250,36 +317,70 @@
 </li>
 </ul>
 </li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Documentación Técnica</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Módulo app</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.texto_a_braille"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#app.convertir"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#funciones">Funciones</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id0"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#rutas-de-la-aplicacion">Rutas de la aplicación</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id1"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="app.html#id2"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="app.html#variables-globales">Variables globales</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="app.html#app.BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#descripcion-general">Descripción General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#funcion-principal-de-conversion">Función Principal de Conversión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#rutas-de-la-aplicacion-web">Rutas de la Aplicación Web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#api-rest">API REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#variables-globales-y-constantes">Variables Globales y Constantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.html#detalles-de-implementacion">Detalles de Implementación</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Recursos Adicionales</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web">Manual de Usuario</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web/issues">Reportar Issues</a></li>
+</ul>
+</div>
 </section>
+<section id="tecnologias-utilizadas">
+<h2>Tecnologías Utilizadas<a class="headerlink" href="#tecnologias-utilizadas" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><strong>Backend:</strong></dt><dd><ul class="simple">
+<li><p>Python 3.14</p></li>
+<li><p>Flask 3.0.0</p></li>
+<li><p>Werkzeug 3.0.1</p></li>
+</ul>
+</dd>
+<dt><strong>Frontend:</strong></dt><dd><ul class="simple">
+<li><p>HTML5 semántico</p></li>
+<li><p>CSS3 con diseño responsivo</p></li>
+<li><p>JavaScript vanilla (ES6+)</p></li>
+<li><p>html2canvas (exportación PNG)</p></li>
+</ul>
+</dd>
+<dt><strong>Documentación:</strong></dt><dd><ul class="simple">
+<li><p>Sphinx 8.2.3</p></li>
+<li><p>Read the Docs Theme</p></li>
+</ul>
+</dd>
+</dl>
 </section>
-<section id="indices-y-tablas">
-<h1>Índices y tablas<a class="headerlink" href="#indices-y-tablas" title="Link to this heading"></a></h1>
+<section id="sobre-el-proyecto">
+<h2>Sobre el Proyecto<a class="headerlink" href="#sobre-el-proyecto" title="Link to this heading"></a></h2>
+<p><strong>Proyecto:</strong> Construcción y Evolución de Software</p>
+<p><strong>Institución:</strong> Escuela Politécnica Nacional</p>
+<p><strong>Facultad:</strong> Ingeniería de Sistemas</p>
+<p><strong>Grupo:</strong> 5</p>
+<p><strong>Versión:</strong> 1.0</p>
+<p><strong>Fecha:</strong> Noviembre 2025</p>
+<section id="indices-y-busqueda">
+<h3>Índices y Búsqueda<a class="headerlink" href="#indices-y-busqueda" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Índice</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Índice de Módulos</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Página de Búsqueda</span></a></p></li>
 </ul>
+</section>
+</section>
 </section>
 
 

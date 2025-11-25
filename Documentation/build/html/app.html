@@ -42,8 +42,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Documentación:</span></p>
-<ul class="current">
+              <p class="caption" role="heading"><span class="caption-text">Guías de Usuario</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="introduccion.html">Introducción</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="introduccion.html#que-es-el-sistema-braille">¿Qué es el Sistema Braille?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="introduccion.html#sobre-este-proyecto">Sobre este Proyecto</a></li>
@@ -70,7 +70,8 @@
 <li class="toctree-l2"><a class="reference internal" href="uso.html#iniciar-el-servidor">Iniciar el Servidor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="uso.html#interfaz-web">Interfaz Web</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#conversion-de-texto">Conversión de Texto</a></li>
-<li class="toctree-l3"><a class="reference internal" href="uso.html#copiar-resultado">Copiar Resultado</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#funcionalidades-adicionales">Funcionalidades Adicionales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uso.html#navegacion">Navegación</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uso.html#atajos-de-teclado">Atajos de Teclado</a></li>
 </ul>
 </li>
@@ -116,25 +117,29 @@
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentación Técnica</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Módulo app</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#app.texto_a_braille"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#app.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#app.convertir"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#funciones">Funciones</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">texto_a_braille()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#descripcion-general">Descripción General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#funcion-principal-de-conversion">Función Principal de Conversión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rutas-de-la-aplicacion-web">Rutas de la Aplicación Web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-rest">API REST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variables-globales-y-constantes">Variables Globales y Constantes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#BRAILLE_NUMBERS"><code class="docutils literal notranslate"><span class="pre">BRAILLE_NUMBERS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SIGNO_MAYUSCULA"><code class="docutils literal notranslate"><span class="pre">SIGNO_MAYUSCULA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#SIGNO_NUMERO"><code class="docutils literal notranslate"><span class="pre">SIGNO_NUMERO</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#rutas-de-la-aplicacion">Rutas de la aplicación</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">convertir()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#variables-globales">Variables globales</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#app.BRAILLE_MAP"><code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#detalles-de-implementacion">Detalles de Implementación</a></li>
 </ul>
 </li>
 </ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">Recursos Adicionales</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web">Manual de Usuario</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web/issues">Reportar Issues</a></li>
 </ul>
 
         </div>
@@ -161,96 +166,139 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-app">
-<span id="modulo-app"></span><h1>Módulo app<a class="headerlink" href="#module-app" title="Link to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="app.texto_a_braille">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">texto_a_braille</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#texto_a_braille"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#app.texto_a_braille" title="Link to this definition"></a></dt>
-<dd><p>Convierte texto normal a símbolos Braille.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>texto</strong> (<em>str</em>) – El texto a convertir</p>
-</dd>
-<dt class="field-even">Devuelve<span class="colon">:</span></dt>
-<dd class="field-even"><p>El texto convertido a símbolos Braille</p>
-</dd>
-<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="app.index">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#index"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#app.index" title="Link to this definition"></a></dt>
-<dd><p>Ruta principal que muestra la interfaz.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="app.convertir">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">convertir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#convertir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#app.convertir" title="Link to this definition"></a></dt>
-<dd><p>Endpoint para convertir texto a Braille.
-Espera un JSON con el campo “texto”.</p>
-</dd></dl>
-
-<section id="funciones">
-<h2>Funciones<a class="headerlink" href="#funciones" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">texto_a_braille</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texto</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#texto_a_braille"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
-<dd><p>Convierte texto normal a símbolos Braille.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>texto</strong> (<em>str</em>) – El texto a convertir</p>
-</dd>
-<dt class="field-even">Devuelve<span class="colon">:</span></dt>
-<dd class="field-even"><p>El texto convertido a símbolos Braille</p>
-</dd>
-<dt class="field-odd">Tipo del valor devuelto<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="modulo-app">
+<h1>Módulo app<a class="headerlink" href="#modulo-app" title="Link to this heading"></a></h1>
+<section id="descripcion-general">
+<h2>Descripción General<a class="headerlink" href="#descripcion-general" title="Link to this heading"></a></h2>
+<p>Este módulo contiene la aplicación Flask principal para el conversor de texto a Braille.
+Implementa la lógica de conversión y expone tanto una interfaz web como una API REST.</p>
 </section>
-<section id="rutas-de-la-aplicacion">
-<h2>Rutas de la aplicación<a class="headerlink" href="#rutas-de-la-aplicacion" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#index"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
-<dd><p>Ruta principal que muestra la interfaz.</p>
-</dd></dl>
+<section id="funcion-principal-de-conversion">
+<h2>Función Principal de Conversión<a class="headerlink" href="#funcion-principal-de-conversion" title="Link to this heading"></a></h2>
+<p>La función <code class="docutils literal notranslate"><span class="pre">texto_a_braille</span></code> es el núcleo del sistema. Convierte texto en español
+(incluyendo mayúsculas, números, tildes y caracteres especiales) a símbolos Braille Unicode.</p>
+<p><strong>Características:</strong></p>
+<ul class="simple">
+<li><p>Soporte completo para el alfabeto español (a-z, ñ)</p></li>
+<li><p>Manejo de vocales acentuadas (á, é, í, ó, ú, ü)</p></li>
+<li><p>Conversión de mayúsculas con prefijo <code class="docutils literal notranslate"><span class="pre">⠨</span></code> (puntos 4-6)</p></li>
+<li><p>Números con prefijo <code class="docutils literal notranslate"><span class="pre">⠼</span></code> (puntos 3-4-5-6)</p></li>
+<li><p>Números decimales (con punto o coma)</p></li>
+<li><p>Signos de puntuación y operadores matemáticos</p></li>
+<li><p>Preservación de saltos de línea</p></li>
+</ul>
+<p><strong>Ejemplo de uso:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">texto_a_braille</span><span class="p">(</span><span class="s2">&quot;Hola&quot;</span><span class="p">)</span>
+<span class="go">&#39;⠨⠓⠕⠇⠁&#39;</span>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="id2">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">convertir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app.html#convertir"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
-<dd><p>Endpoint para convertir texto a Braille.
-Espera un JSON con el campo “texto”.</p>
-</dd></dl>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texto_a_braille</span><span class="p">(</span><span class="s2">&quot;año 2024&quot;</span><span class="p">)</span>
+<span class="go">&#39;⠁⠻⠕⠀⠼⠃⠚⠃⠙&#39;</span>
 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">texto_a_braille</span><span class="p">(</span><span class="s2">&quot;precio: 19.99&quot;</span><span class="p">)</span>
+<span class="go">&#39;⠏⠗⠑⠉⠊⠕⠒⠀⠼⠁⠊⠄⠊⠊&#39;</span>
+</pre></div>
+</div>
 </section>
-<section id="variables-globales">
-<h2>Variables globales<a class="headerlink" href="#variables-globales" title="Link to this heading"></a></h2>
+<section id="rutas-de-la-aplicacion-web">
+<h2>Rutas de la Aplicación Web<a class="headerlink" href="#rutas-de-la-aplicacion-web" title="Link to this heading"></a></h2>
+<p>Ruta principal que renderiza la interfaz web del conversor.</p>
+<p><strong>URL:</strong> <code class="docutils literal notranslate"><span class="pre">/</span></code></p>
+<p><strong>Método:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span></code></p>
+<p><strong>Retorna:</strong> Plantilla HTML con la interfaz de usuario</p>
+<p>Página informativa sobre el contexto del proyecto.</p>
+<p><strong>URL:</strong> <code class="docutils literal notranslate"><span class="pre">/contexto</span></code></p>
+<p><strong>Método:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span></code></p>
+<p><strong>Retorna:</strong> Plantilla HTML con información contextual</p>
+<p>Página con información sobre el equipo de desarrollo.</p>
+<p><strong>URL:</strong> <code class="docutils literal notranslate"><span class="pre">/sobre-nosotros</span></code></p>
+<p><strong>Método:</strong> <code class="docutils literal notranslate"><span class="pre">GET</span></code></p>
+<p><strong>Retorna:</strong> Plantilla HTML con información del equipo</p>
+</section>
+<section id="api-rest">
+<h2>API REST<a class="headerlink" href="#api-rest" title="Link to this heading"></a></h2>
+<p>Endpoint REST para convertir texto a Braille mediante peticiones POST.</p>
+<p><strong>URL:</strong> <code class="docutils literal notranslate"><span class="pre">/convertir</span></code></p>
+<p><strong>Método:</strong> <code class="docutils literal notranslate"><span class="pre">POST</span></code></p>
+<p><strong>Content-Type:</strong> <code class="docutils literal notranslate"><span class="pre">application/json</span></code></p>
+<p><strong>Request Body:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;texto&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hola mundo&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response (200 OK):</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;texto_original&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hola mundo&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;texto_braille&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;⠓⠕⠇⠁⠀⠍⠥⠝⠙⠕&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response (400 Bad Request):</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No se proporcionó texto&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="variables-globales-y-constantes">
+<h2>Variables Globales y Constantes<a class="headerlink" href="#variables-globales-y-constantes" title="Link to this heading"></a></h2>
 <dl class="py data">
-<dt class="sig sig-object py" id="app.BRAILLE_MAP">
-<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">BRAILLE_MAP</span></span><a class="headerlink" href="#app.BRAILLE_MAP" title="Link to this definition"></a></dt>
-<dd><p>dict() -&gt; new empty dictionary
-dict(mapping) -&gt; new dictionary initialized from a mapping object’s</p>
-<blockquote>
-<div><p>(key, value) pairs</p>
-</div></blockquote>
-<dl>
-<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt><dd><p>d = {}
-for k, v in iterable:</p>
-<blockquote>
-<div><p>d[k] = v</p>
-</div></blockquote>
-</dd>
-<dt>dict(<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt><dd><p>in the keyword argument list.  For example:  dict(one=1, two=2)</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="BRAILLE_MAP">
+<span class="sig-name descname"><span class="pre">BRAILLE_MAP</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#BRAILLE_MAP" title="Link to this definition"></a></dt>
+<dd><p>Diccionario de mapeo de caracteres a símbolos Braille Unicode.</p>
+<p>Incluye:</p>
+<ul class="simple">
+<li><p>Alfabeto completo (a-z, w)</p></li>
+<li><p>Letra ñ</p></li>
+<li><p>Vocales acentuadas (á, é, í, ó, ú, ü)</p></li>
+<li><p>Espacios</p></li>
+<li><p>Signos de puntuación (. , ; : ! ¡ ? ¿ - ( ))</p></li>
+<li><p>Operadores matemáticos (+ * = /)</p></li>
+<li><p>Saltos de línea</p></li>
+</ul>
 </dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="BRAILLE_NUMBERS">
+<span class="sig-name descname"><span class="pre">BRAILLE_NUMBERS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#BRAILLE_NUMBERS" title="Link to this definition"></a></dt>
+<dd><p>Diccionario de mapeo de dígitos (0-9) a símbolos Braille.</p>
+<p>En Braille español, los números usan las mismas formas que las primeras
+10 letras (a-j) pero precedidos del signo de número <code class="docutils literal notranslate"><span class="pre">⠼</span></code>.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="SIGNO_MAYUSCULA">
+<span class="sig-name descname"><span class="pre">SIGNO_MAYUSCULA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⠨'</span></em><a class="headerlink" href="#SIGNO_MAYUSCULA" title="Link to this definition"></a></dt>
+<dd><p>Prefijo para indicar mayúsculas (puntos 4-6).
+Se coloca antes de cada letra mayúscula.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="SIGNO_NUMERO">
+<span class="sig-name descname"><span class="pre">SIGNO_NUMERO</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'⠼'</span></em><a class="headerlink" href="#SIGNO_NUMERO" title="Link to this definition"></a></dt>
+<dd><p>Prefijo para indicar números (puntos 3-4-5-6).
+Se coloca al inicio de cada secuencia numérica.</p>
+</dd></dl>
+
+</section>
+<section id="detalles-de-implementacion">
+<h2>Detalles de Implementación<a class="headerlink" href="#detalles-de-implementacion" title="Link to this heading"></a></h2>
+<p><strong>Algoritmo de Conversión:</strong></p>
+<ol class="arabic simple">
+<li><p>Recorre el texto carácter por carácter</p></li>
+<li><p>Detecta secuencias numéricas y las agrupa</p></li>
+<li><p>Agrega prefijos de mayúscula cuando corresponde</p></li>
+<li><p>Maneja puntos y comas dentro de números (decimales)</p></li>
+<li><p>Mapea caracteres según <code class="docutils literal notranslate"><span class="pre">BRAILLE_MAP</span></code></p></li>
+<li><p>Preserva caracteres desconocidos sin cambios</p></li>
+</ol>
+<p><strong>Manejo de Números:</strong></p>
+<p>Los números se procesan en bloques. El prefijo <code class="docutils literal notranslate"><span class="pre">⠼</span></code> se agrega una sola vez
+al inicio de cada secuencia numérica, no antes de cada dígito.</p>
+<p>Ejemplo: <code class="docutils literal notranslate"><span class="pre">&quot;123&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;⠼⠁⠃⠉&quot;</span></code> (no <code class="docutils literal notranslate"><span class="pre">&quot;⠼⠁⠼⠃⠼⠉&quot;</span></code>)</p>
+<p><strong>Manejo de Mayúsculas:</strong></p>
+<p>Cada letra mayúscula recibe su propio prefijo <code class="docutils literal notranslate"><span class="pre">⠨</span></code>.</p>
+<p>Ejemplo: <code class="docutils literal notranslate"><span class="pre">&quot;HOLA&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;⠨⠓⠨⠕⠨⠇⠨⠁&quot;</span></code></p>
 </section>
 </section>
 
