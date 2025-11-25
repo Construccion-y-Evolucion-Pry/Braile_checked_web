@@ -31,7 +31,7 @@ Esta aplicación es una web simple basada en Flask que convierte texto en símbo
 La siguiente imagen muestra, de forma visual, la disposición de los componentes
 de la aplicación y el flujo de datos entre el cliente y el backend.
 
-![Diagrama de arquitectura](../recursos/DiseñoArquitectonico.png)
+![Diagrama de arquitectura](../Documentation/DiseñoArquitectonico.png)
 
 **Cliente (Navegador)**: UI
   (área de texto, botón "Convertir", botón "Copiar").
