@@ -290,6 +290,67 @@ textarea::placeholder {
     font-size: 1rem;
 }
 
+/* Output Section */
+.output-section {
+    margin-top: 2rem;
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.output-header h3 {
+    color: #ecf0f1;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.output-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(135deg, #6C63FF 0%, #5a52d5 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.3);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+    background: linear-gradient(135deg, #7b73ff 0%, #6b63e5 100%);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.action-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.action-btn span {
+    font-size: 1.1rem;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -351,6 +412,21 @@ footer a:hover {
 
     .about-content {
         padding: 1.5rem;
+    }
+
+    .output-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .output-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
