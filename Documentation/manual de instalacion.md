@@ -142,7 +142,6 @@ El conversor actualmente soporta:
 - [ ] Soporte para más símbolos y caracteres especiales
 - [ ] Conversión de Braille a texto normal
 - [ ] Soporte para mayúsculas (indicador de mayúscula en Braille)
-- [ ] Soporte para múltiples idiomas
 - [ ] Exportar resultado como imagen o PDF
 - [ ] API REST para integración con otras aplicaciones
 
@@ -170,6 +169,3 @@ Este proyecto fue desarrollado como parte del curso de Construcción y Evolució
 
 Este proyecto es de código abierto y está disponible para uso educativo.
 
----
-
-Desarrollado con 💙 para mejorar la accesibilidad

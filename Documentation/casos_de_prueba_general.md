@@ -69,10 +69,6 @@ Casos de UI adicionales:
 - Limitar tamaño de payload para prevenir DoS.
 - Validar que la API no ejecuta código o realiza operaciones peligrosas con la entrada.
 
-## 7) Casos de prueba extra y regresión
-
-- Añadir pruebas para futuros mapeos (mayúsculas, indicadores de mayúscula, otros símbolos).
-- Mantener un conjunto de pruebas automatizadas en `tests/` y ejecutarlas en CI (GitHub Actions, etc.).
 
 
 ### Checklist de aceptación

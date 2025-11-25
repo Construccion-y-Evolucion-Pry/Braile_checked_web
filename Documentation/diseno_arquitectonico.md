@@ -29,7 +29,7 @@ Esta aplicación es una web simple basada en Flask que convierte texto en símbo
 ## Diagrama (texto)
 
 La siguiente imagen muestra, de forma visual, la disposición de los componentes
-de la aplicación y el flujo de datos entre el cliente y el backend.
+de la aplicación y el flujo de datos entre el cliente y el backend. 
 
 ![Diagrama de arquitectura](../Documentation/DiseñoArquitectonico.png)
 
@@ -43,6 +43,7 @@ de la aplicación y el flujo de datos entre el cliente y el backend.
   - **Lógica de conversión** (`texto_a_braille(texto)`) que procesa la entrada.
   - **Mapa `BRAILLE_MAP`** que actúa como tabla de consulta (carácter → símbolo).
 
+Para una futura actualización de la ar
 **Despliegue (opcional)** con
   contenedores (`Docker`), proxy (`Nginx`), servidor WSGI (gunicorn/waitress)
   y componentes opcionales como `Redis` para caching.

@@ -305,23 +305,7 @@ python -m unittest test_braille_converter.TestBrailleConverter -v
 python -m unittest test_braille_converter.TestBrailleConverter.test_CP001_primera_serie_minusculas
 ```
 
-### 4.3 Interpretación de Resultados
 
-- **OK**: El caso de prueba pasó exitosamente
-- **FAIL**: El caso de prueba falló (resultado diferente al esperado)
-- **ERROR**: Ocurrió un error durante la ejecución
-
----
-
-## 5. Registro de Ejecución
-
-### Plantilla de Registro por Caso de Prueba
-
-| ID | Fecha | Resultado | Observaciones | Ejecutado por |
-|----|-------|-----------|---------------|---------------|
-| CP-001 | | | | |
-| CP-002 | | | | |
-| ... | | | | |
 
 ### Plantilla de Análisis de Fallos
 
@@ -361,7 +345,3 @@ python -m unittest test_braille_converter.TestBrailleConverter.test_CP001_primer
 Este conjunto de casos de prueba garantiza la validación completa de los requisitos del primer bimestre del proyecto. Cada caso está diseñado para verificar aspectos específicos de la transcripción Braille según el estándar español definido en las indicaciones del proyecto.
 
 ---
-
-**Preparado por:** [Equipo de Desarrollo]  
-**Revisado por:** [Nombre del Revisor]  
-**Aprobado por:** [Nombre del Aprobador]

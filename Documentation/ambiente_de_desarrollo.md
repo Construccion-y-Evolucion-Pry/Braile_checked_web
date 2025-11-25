@@ -1,3 +1,5 @@
+
+
 # Ambiente de Desarrollo
 
 Este documento describe las herramientas seleccionadas, la configuración mínima y el flujo de trabajo Git usado en el proyecto `Braile_checked_web`. También incluye comandos útiles para poner el entorno en marcha, generar la documentación y las reglas de ramificación que aplicamos (Main, develop, feature, hotfix, documentation).
@@ -6,11 +8,11 @@ Este documento describe las herramientas seleccionadas, la configuración mínim
 
 - **Lenguaje:** Python (3.7+ recomendado). Se probó con Python 3.11.
 - **Framework web:** Flask (`Flask==3.0.0`) — backend ligero para servir la UI y la API de conversión a Braille.
-- **Dependencias:** ver `requirements.txt` para versiones exactas (Werkzeug, Sphinx, sphinx-rtd-theme, etc.).
+- **Dependencias:** ver `requirements.txt` para versiones exactas (Werkzeug, Sphinx, etc.).
 - **Control de versiones:** Git (CLI) y hospedaje en **GitHub**.
 - **Generador de documentación:** Sphinx (`sphinx==8.x`) con tema `sphinx-rtd-theme`.
-- **Editor / IDE recomendado:** Visual Studio Code o PyCharm.
-- **Navegador:** Chrome, Firefox o Edge para pruebas (navegadores modernos con buen soporte Unicode).
+- **Editor / IDE recomendado:** Visual Studio Code.
+- **Navegador:** Chrome (navegadores modernos con buen soporte Unicode).
 
 ## Configuración del entorno (local)
 
@@ -87,7 +89,7 @@ Reglas y flujo recomendado:
 ```bash
 git checkout develop
 git pull origin develop
-git checkout -b feature/mi-nueva-funcionalidad
+git checkout -b feature/nueva-funcionalidad
 ```
 
 2. Trabajar localmente, commits atómicos y descriptivos:
@@ -119,14 +121,6 @@ git checkout develop
 git pull origin develop
 ```
 
-- Etiquetado de releases:
-
-```bash
-git checkout main
-git pull origin main
-git tag -a v1.0.0 -m "Release v1.0.0"
-git push origin --tags
-```
 
 ## Consideraciones de accesibilidad y factor humano
 
@@ -144,6 +138,4 @@ Recordar que el software no es un fin en sí mismo, sino una herramienta para me
 - `requirements.txt` — dependencias del proyecto
 - `app.py` — servidor Flask y lógica de conversión
 - `templates/` y `static/` — frontend
-- Documentación generada: `Documentation/build/html/index.html`
-
-
+- Documentación generada: `Documentation/build/html/index.html`, ejecutarlo a partir de `start Documentation/build/html/index.html`
