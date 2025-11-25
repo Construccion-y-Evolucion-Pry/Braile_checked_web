@@ -37,7 +37,6 @@ Una aplicación web desarrollada con Flask que permite convertir texto normal a 
 - ✅ Conversión en tiempo real de texto a Braille
 - ✅ Soporte para letras (a-z), números (0-9) y algunos símbolos de puntuación
 - ✅ Interfaz moderna y responsiva
-- ✅ Función para copiar el texto en Braille al portapapeles
 - ✅ Diseño accesible y fácil de usar
 
 ## 📋 Requisitos
@@ -86,9 +85,7 @@ Una aplicación web desarrollada con Flask que permite convertir texto normal a 
 
 3. **Usar el conversor**
    - Escribir el texto en el área de entrada
-   - Hacer clic en "Convertir a Braille ⚡"
    - Ver el resultado en símbolos Braille
-   - Opcionalmente, copiar el resultado con el botón "📋 Copiar Braille"
 
 ## 📁 Estructura del Proyecto
 

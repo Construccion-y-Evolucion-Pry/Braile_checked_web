@@ -75,16 +75,11 @@ Manual o automatizado (Selenium / Playwright):
 
 - Abrir `http://localhost:5000`.
 - Introducir texto en el `textarea`.
-- Pulsar "Convertir a Braille ⚡" y verificar que aparece el resultado.
-- Pulsar "📋 Copiar Braille" y verificar portapapeles.
+- La traducción a texto braile es instantanea a la par que se introduce texto 
 
-Casos de UI adicionales:
-- Probar `Ctrl+Enter` para activar la conversión.
-- Probar comportamiento cuando el servidor responde con error.
 
 ## 4) Pruebas de accesibilidad
 
-- Verificar navegación por teclado (TAB para focos, botones activables con Enter/Space).
 - Probar con lector de pantalla (NVDA, VoiceOver) y comprobar que las secciones son legibles.
 - Comprobar contraste de colores y tamaño de fuente adaptables.
 

@@ -40,7 +40,6 @@ Una vez que el texto ha sido convertido:
 Atajos de Teclado
 ^^^^^^^^^^^^^^^^^
 
-* **Ctrl + Enter** (mientras escribes en el área de texto): Convierte automáticamente el texto sin hacer clic en el botón
 
 Ejemplos de Uso
 ---------------
