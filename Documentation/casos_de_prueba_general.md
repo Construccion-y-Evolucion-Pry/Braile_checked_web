@@ -73,9 +73,53 @@ def test_vacio():
 
 Manual o automatizado (Selenium / Playwright):
 
+### Caso E2E-001: Conversión básica de texto
 - Abrir `http://localhost:5000`.
 - Introducir texto en el `textarea`.
-- La traducción a texto braile es instantanea a la par que se introduce texto 
+- **Verificar**: La traducción a texto Braille es instantánea a la par que se introduce texto.
+- **Resultado esperado**: El texto Braille aparece en tiempo real.
+
+### Caso E2E-002: Funcionalidad de copiar
+- Introducir texto: "Hola mundo".
+- Esperar a que se muestre el resultado en Braille.
+- Hacer clic en el botón "📋 Copiar".
+- **Verificar**: 
+  - El botón cambia a "✅ ¡Copiado!" temporalmente.
+  - El botón cambia de color a verde.
+  - Después de 2 segundos vuelve al estado original.
+- Pegar (Ctrl+V) en un editor de texto.
+- **Resultado esperado**: El texto en Braille se pega correctamente.
+
+### Caso E2E-003: Exportar como PNG
+- Introducir texto: "Python 2024".
+- Esperar a que se muestre el resultado en Braille.
+- Hacer clic en el botón "🖼️ Exportar PNG".
+- **Verificar**:
+  - El botón muestra "⏳ Generando..." temporalmente.
+  - Se descarga un archivo PNG con nombre formato: `braille-traduccion-YYYY-MM-DD-HH-MM-SS.png`.
+  - El botón cambia a "✅ ¡Exportado!" en verde.
+  - Después de 2 segundos vuelve al estado original.
+- Abrir el archivo PNG descargado.
+- **Resultado esperado**: 
+  - La imagen contiene el título "Traducción a Braille".
+  - Muestra el texto original.
+  - Muestra el texto en Braille con fuente grande.
+  - Tiene el footer "Generado por BraiLator".
+  - Fondo blanco profesional.
+
+### Caso E2E-004: Validación de campos vacíos
+- No introducir texto (dejar vacío).
+- Intentar hacer clic en "Copiar".
+- **Resultado esperado**: Alerta "⚠️ No hay texto en Braille para copiar".
+- Intentar hacer clic en "Exportar PNG".
+- **Resultado esperado**: Alerta "⚠️ No hay texto en Braille para exportar".
+
+### Caso E2E-005: Responsividad
+- Abrir la aplicación en diferentes tamaños de pantalla (desktop, tablet, mobile).
+- **Verificar**:
+  - Los botones se reorganizan correctamente en pantallas pequeñas.
+  - Los botones ocupan el ancho completo en móviles.
+  - Todas las funcionalidades siguen operativas. 
 
 
 ## 4) Pruebas de accesibilidad
@@ -97,8 +141,31 @@ Manual o automatizado (Selenium / Playwright):
 
 ### Checklist de aceptación
 
+#### Funcionalidad Core
 -  Conversión correcta para letras básicas.
 -  API devuelve 400 para entradas vacías.
--  UI muestra y copia correctamente el resultado.
+-  Conversión en tiempo real funciona correctamente.
 - Aplicación arranca en entorno virtual con `pip install -r requirements.txt`.
 -  Pruebas unitarias y de integración pasan en CI.
+
+#### Funcionalidad de Copiar
+-  Botón "Copiar" copia el texto Braille al portapapeles.
+-  Feedback visual correcto (cambio a verde y texto "¡Copiado!").
+-  Validación de campo vacío funciona (muestra alerta).
+-  Funciona en Chrome, Firefox, Edge.
+
+#### Funcionalidad de Exportar PNG
+-  Botón "Exportar PNG" genera la imagen correctamente.
+-  La imagen contiene título, texto original y traducción Braille.
+-  El nombre del archivo incluye timestamp.
+-  La imagen tiene alta calidad (scale: 2).
+-  Feedback visual correcto durante la generación.
+-  Validación de campo vacío funciona (muestra alerta).
+-  La librería html2canvas se carga correctamente desde CDN.
+
+#### Interfaz de Usuario
+-  UI muestra y copia correctamente el resultado.
+-  Botones tienen estados hover correctos.
+-  Diseño responsivo funciona en móviles y tablets.
+-  Botones se apilan verticalmente en pantallas pequeñas.
+-  Iconos y textos de botones son claros y descriptivos.
