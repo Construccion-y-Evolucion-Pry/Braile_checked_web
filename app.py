@@ -14,7 +14,7 @@ BRAILLE_MAP = {
     # Caracteres especiales del español
     'ñ': '⠻',
 
-    # Vocales con tilde: signo de acento ⠬ + vocal
+    # Vocales con tilde
     'á': '⠷',
     'é': '⠮',
     'í': '⠌',
@@ -23,11 +23,12 @@ BRAILLE_MAP = {
 
     'ü': '⠳',
 
-    # Espacios y signos
+    # Espacios, signos y operadores
     ' ': '⠀',
     '.': '⠲', ',': '⠂', ';': '⠆', ':': '⠒',
     '!': '⠖', '¡': '⠖', '?': '⠦', '-': '⠤',
     '(': '⠐⠣', ')': '⠐⠜', '¿': '⠦',
+    '+': '⠖', '*': '⠦', '=': '⠶', '/': '⠲',
     '\n': '\n'  # Preservar saltos de línea
 }
 
@@ -37,34 +38,61 @@ BRAILLE_NUMBERS = {
     '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊', '0': '⠚',
 }
 
+# Signos especiales
+SIGNO_MAYUSCULA = '⠨'  # Puntos 4-6
+SIGNO_NUMERO = '⠼'     # Puntos 3-4-5-6
+
 
 def texto_a_braille(texto):
     resultado = []
     numero_activo = False
     numero_buffer = ''
+    i = 0
 
-    for caracter in texto.lower():
-        # Caracter numérico
+    while i < len(texto):
+        caracter = texto[i]
+        
+        # Detectar si es un dígito
         if caracter.isdigit():
+            if not numero_activo:
+                numero_activo = True
+                numero_buffer = ''
             numero_buffer += BRAILLE_NUMBERS[caracter]
-            numero_activo = True
+            
+        # Si estamos en modo número y encontramos punto o coma decimal
+        elif numero_activo and caracter in ['.', ',']:
+            numero_buffer += BRAILLE_MAP[caracter]
+            
         else:
-            # Si termina un bloque de números → agregamos prefijo ⠼
+            # Finalizar el número si estaba activo
             if numero_activo:
-                resultado.append('⠼' + numero_buffer)
+                resultado.append(SIGNO_NUMERO + numero_buffer)
                 numero_buffer = ''
                 numero_activo = False
+            
+            if caracter == '\n':
+                resultado.append('\n')
 
-            # Caracter del mapa
-            if caracter in BRAILLE_MAP:
-                resultado.append(BRAILLE_MAP[caracter])
+            # Procesar mayúsculas
+            elif caracter.isupper():
+                char_lower = caracter.lower()
+                if char_lower in BRAILLE_MAP:
+                    resultado.append(SIGNO_MAYUSCULA + BRAILLE_MAP[char_lower])
+                else:
+                    resultado.append(caracter)
+                    
+            # Otros caracteres (minúsculas, tildes, signos, etc.)
+            elif caracter.lower() in BRAILLE_MAP:
+                resultado.append(BRAILLE_MAP[caracter.lower()])
             else:
                 # Dejar caracteres desconocidos tal cual
                 resultado.append(caracter)
+        
+        i += 1
 
     # Si terminó en número
     if numero_activo:
-        resultado.append('⠼' + numero_buffer)
+        resultado.append(SIGNO_NUMERO + numero_buffer)
 
     return ''.join(resultado)
 
