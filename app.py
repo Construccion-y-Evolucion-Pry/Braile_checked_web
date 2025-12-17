@@ -25,7 +25,7 @@ BRAILLE_MAP = {
 
     # Espacios, signos y operadores
     ' ': '⠀',
-    '.': '⠲', ',': '⠂', ';': '⠆', ':': '⠒',
+    '.': '⠄', ',': '⠂', ';': '⠆', ':': '⠒',
     '!': '⠖', '¡': '⠖', '?': '⠦', '-': '⠤',
     '(': '⠐⠣', ')': '⠐⠜', '¿': '⠦',
     '+': '⠖', '*': '⠦', '=': '⠶', '/': '⠲',
@@ -41,6 +41,10 @@ BRAILLE_NUMBERS = {
 # Signos especiales
 SIGNO_MAYUSCULA = '⠨'  # Puntos 4-6
 SIGNO_NUMERO = '⠼'     # Puntos 3-4-5-6
+
+# Crear diccionario inverso para Braille → Texto
+BRAILLE_TO_TEXT = {v: k for k, v in BRAILLE_MAP.items()}
+BRAILLE_TO_NUMBER = {v: k for k, v in BRAILLE_NUMBERS.items()}
 
 
 def texto_a_braille(texto):
@@ -97,6 +101,70 @@ def texto_a_braille(texto):
     return ''.join(resultado)
 
 
+def braille_a_texto(braille_texto):
+    resultado = []
+    i = 0
+    mayuscula_siguiente = False
+    numero_activo = False
+    
+    while i < len(braille_texto):
+        caracter = braille_texto[i]
+        
+        # Preservar saltos de línea
+        if caracter == '\n':
+            resultado.append('\n')
+            i += 1
+            continue
+        
+        # Detectar signo de mayúscula
+        if caracter == SIGNO_MAYUSCULA:
+            mayuscula_siguiente = True
+            i += 1
+            continue
+        
+        # Detectar signo de número
+        if caracter == SIGNO_NUMERO:
+            numero_activo = True
+            i += 1
+            continue
+        
+        # Si estamos en modo número
+        if numero_activo:
+            if caracter in BRAILLE_TO_NUMBER:
+                resultado.append(BRAILLE_TO_NUMBER[caracter])
+                i += 1
+                continue
+            elif caracter in [BRAILLE_MAP['.'], BRAILLE_MAP[',']]:
+                # Permitir punto o coma en números
+                if caracter == BRAILLE_MAP['.']:
+                    resultado.append('.')
+                else:
+                    resultado.append(',')
+                i += 1
+                continue
+            else:
+                # Salir del modo número si encontramos algo que no es dígito
+                numero_activo = False
+        
+        # Convertir carácter braille a texto
+        if caracter in BRAILLE_TO_TEXT:
+            letra = BRAILLE_TO_TEXT[caracter]
+            
+            # Aplicar mayúscula si es necesario
+            if mayuscula_siguiente and letra.isalpha():
+                resultado.append(letra.upper())
+                mayuscula_siguiente = False
+            else:
+                resultado.append(letra)
+        else:
+            # Si no está en el diccionario, dejarlo tal cual
+            resultado.append(caracter)
+        
+        i += 1
+    
+    return ''.join(resultado)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -125,6 +193,22 @@ def convertir():
     return jsonify({
         'texto_original': texto,
         'texto_braille': braille
+    })
+
+
+@app.route('/convertir-braille', methods=['POST'])
+def convertir_braille():
+    data = request.get_json()
+    braille = data.get('braille', '')
+
+    if not braille:
+        return jsonify({'error': 'No se proporcionó texto braille'}), 400
+
+    texto = braille_a_texto(braille)
+
+    return jsonify({
+        'braille_original': braille,
+        'texto': texto
     })
 
 

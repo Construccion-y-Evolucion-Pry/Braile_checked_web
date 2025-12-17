@@ -5,12 +5,255 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BraiLator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Estilos adicionales para los botones de impresión */
+        .print-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+        
+        .print-btn {
+            padding: 0.7rem 1.8rem;
+            background: transparent;
+            border: 2px solid #b4b6b8;
+            color: #b4b6b8;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .print-btn:hover {
+            background: #ffffff;
+            color: #212529;
+            border-color: #ffffff;
+        }
+        
+        .print-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Modal de vista previa */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: #2c3338;
+            margin: 3% auto;
+            padding: 2rem;
+            border: 2px solid #b4b6b8;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #b4b6b8;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #6c757d;
+            cursor: pointer;
+            border: none;
+            background: none;
+            transition: color 0.2s;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .close-btn:hover {
+            color: #ffffff;
+        }
+        
+        .preview-container {
+            background: #212529;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid #b4b6b8;
+            min-height: 200px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .preview-section {
+            margin-bottom: 2rem;
+        }
+        
+        .preview-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .preview-label {
+            font-weight: 600;
+            color: #adb5bd;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #343a40;
+            border-radius: 4px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        .preview-text {
+            font-size: 1.5rem;
+            line-height: 2;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            padding: 1rem;
+            background: #2c3338;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            margin-top: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .mirror-text {
+            direction: rtl;
+            transform: scaleX(-1);
+            display: inline-block;
+        }
+        
+        .preview-section h3 {
+            color: #adb5bd;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        
+        .modal-btn {
+            padding: 0.7rem 1.8rem;
+            border: 2px solid #b4b6b8;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .modal-btn.print {
+            background: transparent;
+            color: #b4b6b8;
+        }
+        
+        .modal-btn.print:hover {
+            background: #ffffff;
+            color: #212529;
+            border-color: #ffffff;
+        }
+        
+        .modal-btn.cancel {
+            background: transparent;
+            color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .modal-btn.cancel:hover {
+            background: #343a40;
+            color: #adb5bd;
+            border-color: #adb5bd;
+        }
+
+        /* Estilos para impresión */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .print-content, .print-content * {
+                visibility: visible;
+            }
+            
+            .print-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 2cm;
+            }
+        }
+
+        /* Responsive para botones */
+        @media (max-width: 768px) {
+            .print-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .print-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 1.5rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
             <a href="/" class="logo">
-                <span class="logo-icon">⠏⠕⠇⠊</span>
+                <span class="logo-icon">⠃⠗⠇⠊</span>
                 <span>BraiLator</span>
             </a>
             <nav>
@@ -26,42 +269,123 @@
     <div class="container">
         <div class="page-title">
             <h1>
-                <span class="braille-decoration">⠓⠕⠇⠁</span>
+                <span class="braille-decoration">⠞⠗⠇⠀</span>
                 Traductor Braille
-                <span class="braille-decoration">⠒⠙</span>
+                <span class="braille-decoration">⠀⠙⠙</span>
             </h1>
         </div>
 
         <div class="translator-container">
             <div class="tabs">
-                <button class="tab-btn active">Texto a Braille</button>
-                <button class="tab-btn" disabled>Braille a Texto</button>
+                <button class="tab-btn" data-tab="texto-braille">Texto a Braille</button>
+                <button class="tab-btn" data-tab="braille-texto">Braille a Texto</button>
             </div>
 
-            <p class="page-subtitle" style="text-align: center; margin-bottom: 1.5rem;">
-                Escribe o pega el texto a traducir en lenguaje Braille.
-            </p>
+            <!-- Pestaña Texto a Braille -->
+            <div id="texto-braille-tab" class="tab-content">
+                <p class="page-subtitle" style="text-align: center; margin-bottom: 1.5rem;">
+                    Escribe o pega el texto a traducir en lenguaje Braille.
+                </p>
 
-            <div class="converter-content">
-                <textarea 
-                    id="texto-input" 
-                    placeholder="Escribe aquí tu texto..."
-                ></textarea>
+                <div class="converter-content">
+                    <textarea 
+                        id="texto-input" 
+                        placeholder="Escribe aquí tu texto..."
+                    ></textarea>
 
-                <div id="braille-output" class="braille-output empty"></div>
+                    <div id="braille-output" class="braille-output empty"></div>
+                </div>
+
+                <div class="print-buttons">
+                    <button class="print-btn" onclick="mostrarVistaPrevia('normal')">
+                        Imprimir para Leer
+                    </button>
+                    <button class="print-btn" onclick="mostrarVistaPrevia('espejo')">
+                        Imprimir para Escribir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pestaña Braille a Texto -->
+            <div id="braille-texto-tab" class="tab-content" style="display: none;">
+                <p class="page-subtitle" style="text-align: center; margin-bottom: 1.5rem;">
+                    Escribe o pega el texto en Braille para convertirlo a texto normal.
+                </p>
+
+                <div class="converter-content">
+                    <textarea 
+                        id="braille-input" 
+                        placeholder="Escribe aquí en Braille... (⠓⠕⠇⠁)"
+                    ></textarea>
+
+                    <div id="texto-output" class="braille-output empty"></div>
+                </div>
+
+                <div class="print-buttons">
+                    <button class="print-btn" onclick="mostrarVistaPreviaBrailleTab('normal')">
+                        Imprimir para Leer
+                    </button>
+                    <button class="print-btn" onclick="mostrarVistaPreviaBrailleTab('espejo')">
+                        Imprimir para Escribir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Vista Previa -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Vista Previa de Impresión</h2>
+                <button class="close-btn" onclick="cerrarModal()">&times;</button>
+            </div>
+            
+            <div class="preview-container" id="preview-content">
+                <!-- Contenido dinámico -->
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="cerrarModal()">Cancelar</button>
+                <button class="modal-btn print" onclick="imprimirContenido()">Imprimir</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>Brailator, by <a href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web" target="_blank">Nosotros ❣</a></p>
+        <p>Brailator, by <a href="https://github.com/Construccion-y-Evolucion-Pry/Braile_checked_web" target="_blank">Nosotros ⣿</a></p>
     </footer>
 
     <script>
         const textoInput = document.getElementById('texto-input');
         const brailleOutput = document.getElementById('braille-output');
+        const brailleInput = document.getElementById('braille-input');
+        const textoOutput = document.getElementById('texto-output');
+        
+        let currentPrintMode = 'normal';
+        let currentPrintContent = '';
 
-        // Conversión automática en tiempo real
+        // Manejo de pestañas
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.getAttribute('data-tab');
+                
+                // Actualizar botones activos
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Mostrar/ocultar contenido
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                document.getElementById(tabName + '-tab').style.display = 'block';
+            });
+        });
+
+        // Activar primera pestaña por defecto
+        document.querySelector('.tab-btn[data-tab="texto-braille"]').classList.add('active');
+
+        // Conversión Texto → Braille (tiempo real)
         textoInput.addEventListener('input', async () => {
             const texto = textoInput.value;
             
@@ -95,6 +419,261 @@
                 brailleOutput.style.color = '#e74c3c';
             }
         });
+
+        // Copiar al portapapeles - Texto a Braille
+        brailleOutput.addEventListener('click', async () => {
+            if (brailleOutput.classList.contains('empty') || !brailleOutput.textContent) {
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(brailleOutput.textContent);
+                mostrarNotificacion('✓ Texto copiado al portapapeles');
+            } catch (error) {
+                mostrarNotificacion('✗ Error al copiar', true);
+            }
+        });
+
+        // Conversión Braille → Texto (tiempo real)
+        brailleInput.addEventListener('input', async () => {
+            const braille = brailleInput.value;
+            
+            if (!braille.trim()) {
+                textoOutput.textContent = '';
+                textoOutput.classList.add('empty');
+                return;
+            }
+
+            textoOutput.classList.remove('empty');
+
+            try {
+                const response = await fetch('/convertir-braille', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ braille: braille })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    textoOutput.textContent = data.texto;
+                } else {
+                    textoOutput.textContent = 'Error al convertir';
+                    textoOutput.style.color = '#e74c3c';
+                }
+            } catch (error) {
+                textoOutput.textContent = 'Error de conexión';
+                textoOutput.style.color = '#e74c3c';
+            }
+        });
+
+        // Copiar al portapapeles - Braille a Texto
+        textoOutput.addEventListener('click', async () => {
+            if (textoOutput.classList.contains('empty') || !textoOutput.textContent) {
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(textoOutput.textContent);
+                mostrarNotificacion('✓ Texto copiado al portapapeles');
+            } catch (error) {
+                mostrarNotificacion('✗ Error al copiar', true);
+            }
+        });
+
+        // Función para mostrar notificación
+        function mostrarNotificacion(mensaje, error = false) {
+            const notification = document.createElement('div');
+            notification.className = 'copied-notification';
+            notification.textContent = mensaje;
+            if (error) {
+                notification.style.background = '#e74c3c';
+            }
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideInUp 0.3s ease reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 2000);
+        }
+
+        // Funciones de impresión para pestaña Texto → Braille
+        function mostrarVistaPrevia(modo) {
+            const textoOriginal = textoInput.value;
+            const textoBraille = brailleOutput.textContent;
+            
+            if (!textoBraille || textoBraille === '' || brailleOutput.classList.contains('empty')) {
+                alert('No hay contenido para imprimir. Por favor, escribe algo primero.');
+                return;
+            }
+            
+            currentPrintMode = modo;
+            currentPrintContent = textoBraille;
+            
+            const modal = document.getElementById('preview-modal');
+            const previewContent = document.getElementById('preview-content');
+            
+            let html = '';
+            
+            if (modo === 'normal') {
+                html = `
+                    <div class="preview-section">
+                        <div class="preview-label">Con fuente Braille</div>
+                        <div class="preview-text">${textoBraille}</div>
+                    </div>
+                    <div class="preview-section">
+                        <div class="preview-label">Sin fuente Braille</div>
+                        <div class="preview-text">${textoOriginal}</div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="preview-section">
+                        <h3>Imagen espejo (para escribir con punzón)</h3>
+                        <div class="preview-label">Texto invertido horizontalmente</div>
+                        <div class="preview-text mirror-text">${textoBraille}</div>
+                    </div>
+                    <div class="preview-section">
+                        <div class="preview-label">Texto original (referencia)</div>
+                        <div class="preview-text">${textoOriginal}</div>
+                    </div>
+                `;
+            }
+            
+            previewContent.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        // Funciones de impresión para pestaña Braille → Texto
+        function mostrarVistaPreviaBrailleTab(modo) {
+            const textoBraille = brailleInput.value;
+            const textoConvertido = textoOutput.textContent;
+            
+            if (!textoBraille || textoBraille === '' || textoOutput.classList.contains('empty')) {
+                alert('No hay contenido para imprimir. Por favor, escribe algo primero.');
+                return;
+            }
+            
+            currentPrintMode = modo;
+            currentPrintContent = textoBraille;
+            
+            const modal = document.getElementById('preview-modal');
+            const previewContent = document.getElementById('preview-content');
+            
+            let html = '';
+            
+            if (modo === 'normal') {
+                html = `
+                    <div class="preview-section">
+                        <div class="preview-label">Con fuente Braille</div>
+                        <div class="preview-text">${textoBraille}</div>
+                    </div>
+                    <div class="preview-section">
+                        <div class="preview-label">Sin fuente Braille</div>
+                        <div class="preview-text">${textoConvertido}</div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="preview-section">
+                        <h3>📝 Imagen espejo (para escribir con punzón)</h3>
+                        <div class="preview-label">Texto invertido horizontalmente</div>
+                        <div class="preview-text mirror-text">${textoBraille}</div>
+                    </div>
+                    <div class="preview-section">
+                        <div class="preview-label">Texto original (referencia)</div>
+                        <div class="preview-text">${textoConvertido}</div>
+                    </div>
+                `;
+            }
+            
+            previewContent.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        function cerrarModal() {
+            document.getElementById('preview-modal').style.display = 'none';
+        }
+
+        function imprimirContenido() {
+            // Crear una nueva ventana con el contenido a imprimir
+            const printWindow = window.open('', '', 'height=600,width=800');
+            
+            // Obtener solo el texto traducido según el modo actual
+            let contenidoImprimir = '';
+            const tabActiva = document.querySelector('.tab-btn.active').getAttribute('data-tab');
+            
+            if (tabActiva === 'texto-braille') {
+                // En pestaña Texto → Braille, imprimir el braille
+                if (currentPrintMode === 'normal') {
+                    contenidoImprimir = brailleOutput.textContent;
+                } else {
+                    // En modo espejo, invertir horizontalmente
+                    contenidoImprimir = `<span style="direction: rtl; transform: scaleX(-1); display: inline-block;">${brailleOutput.textContent}</span>`;
+                }
+            } else {
+                // En pestaña Braille → Texto, imprimir el texto convertido
+                if (currentPrintMode === 'normal') {
+                    contenidoImprimir = textoOutput.textContent;
+                } else {
+                    // En modo espejo, invertir horizontalmente
+                    contenidoImprimir = `<span style="direction: rtl; transform: scaleX(-1); display: inline-block;">${brailleInput.value}</span>`;
+                }
+            }
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Imprimir - BraiLator</title>
+                    <style>
+                        @page {
+                            margin: 2cm;
+                        }
+                        body {
+                            font-family: 'Courier New', monospace;
+                            padding: 0;
+                            margin: 0;
+                            background: white;
+                        }
+                        .print-content {
+                            font-size: 1.5rem;
+                            line-height: 2;
+                            white-space: pre-wrap;
+                            word-wrap: break-word;
+                            color: #000;
+                            padding: 1cm;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="print-content">${contenidoImprimir}</div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.focus();
+            
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 250);
+            
+            cerrarModal();
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('preview-modal');
+            if (event.target === modal) {
+                cerrarModal();
+            }
+        }
     </script>
 </body>
 </html>
