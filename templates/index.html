@@ -5,255 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BraiLator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        /* Estilos adicionales para los botones de impresión */
-        .print-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            justify-content: center;
-        }
-        
-        .print-btn {
-            padding: 0.7rem 1.8rem;
-            background: transparent;
-            border: 2px solid #b4b6b8;
-            color: #b4b6b8;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        
-        .print-btn:hover {
-            background: #ffffff;
-            color: #212529;
-            border-color: #ffffff;
-        }
-        
-        .print-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* Modal de vista previa */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            background: #2c3338;
-            margin: 3% auto;
-            padding: 2rem;
-            border: 2px solid #b4b6b8;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 800px;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #b4b6b8;
-        }
-        
-        .modal-header h2 {
-            margin: 0;
-            color: #ffffff;
-            font-size: 1.6rem;
-            font-weight: 600;
-        }
-        
-        .close-btn {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #6c757d;
-            cursor: pointer;
-            border: none;
-            background: none;
-            transition: color 0.2s;
-            padding: 0;
-            line-height: 1;
-        }
-        
-        .close-btn:hover {
-            color: #ffffff;
-        }
-        
-        .preview-container {
-            background: #212529;
-            padding: 2rem;
-            border-radius: 8px;
-            border: 2px solid #b4b6b8;
-            min-height: 200px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .preview-section {
-            margin-bottom: 2rem;
-        }
-        
-        .preview-section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .preview-label {
-            font-weight: 600;
-            color: #adb5bd;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: #343a40;
-            border-radius: 4px;
-            display: inline-block;
-            font-size: 0.9rem;
-        }
-        
-        .preview-text {
-            font-size: 1.5rem;
-            line-height: 2;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            word-break: break-word;
-            overflow-wrap: break-word;
-            padding: 1rem;
-            background: #2c3338;
-            border-radius: 4px;
-            color: #ffffff;
-            font-family: 'Courier New', monospace;
-            margin-top: 0.5rem;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .mirror-text {
-            direction: rtl;
-            transform: scaleX(-1);
-            display: inline-block;
-        }
-        
-        .preview-section h3 {
-            color: #adb5bd;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-        
-        .modal-btn {
-            padding: 0.7rem 1.8rem;
-            border: 2px solid #b4b6b8;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .modal-btn.print {
-            background: transparent;
-            color: #b4b6b8;
-        }
-        
-        .modal-btn.print:hover {
-            background: #ffffff;
-            color: #212529;
-            border-color: #ffffff;
-        }
-        
-        .modal-btn.cancel {
-            background: transparent;
-            color: #6c757d;
-            border-color: #6c757d;
-        }
-        
-        .modal-btn.cancel:hover {
-            background: #343a40;
-            color: #adb5bd;
-            border-color: #adb5bd;
-        }
-
-        /* Estilos para impresión */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            
-            .print-content, .print-content * {
-                visibility: visible;
-            }
-            
-            .print-content {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                padding: 2cm;
-            }
-        }
-
-        /* Responsive para botones */
-        @media (max-width: 768px) {
-            .print-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .print-btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
-                padding: 1.5rem;
-            }
-
-            .modal-actions {
-                flex-direction: column;
-            }
-
-            .modal-btn {
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
         <div class="header-content">
             <a href="/" class="logo">
-                <span class="logo-icon">⠃⠗⠇⠊</span>
+                <span class="logo-icon">⠨⠋⠨⠊⠨⠎</span>
                 <span>BraiLator</span>
             </a>
             <nav>
@@ -269,9 +26,9 @@
     <div class="container">
         <div class="page-title">
             <h1>
-                <span class="braille-decoration">⠞⠗⠇⠀</span>
+                <span class="braille-decoration">⠨⠏⠕⠇⠊</span>
                 Traductor Braille
-                <span class="braille-decoration">⠀⠙⠙</span>
+                <span class="braille-decoration">⠒⠨⠙</span>
             </h1>
         </div>
 
@@ -426,12 +183,7 @@
                 return;
             }
 
-            try {
-                await navigator.clipboard.writeText(brailleOutput.textContent);
-                mostrarNotificacion('✓ Texto copiado al portapapeles');
-            } catch (error) {
-                mostrarNotificacion('✗ Error al copiar', true);
-            }
+            copiarAlPortapapeles(brailleOutput.textContent);
         });
 
         // Conversión Braille → Texto (tiempo real)
@@ -475,28 +227,76 @@
                 return;
             }
 
-            try {
-                await navigator.clipboard.writeText(textoOutput.textContent);
-                mostrarNotificacion('✓ Texto copiado al portapapeles');
-            } catch (error) {
-                mostrarNotificacion('✗ Error al copiar', true);
-            }
+            copiarAlPortapapeles(textoOutput.textContent);
         });
+
+        // Función para copiar al portapapeles (compatible con HTTP y HTTPS)
+        function copiarAlPortapapeles(texto) {
+            // Método 1: Intentar con la API moderna (requiere HTTPS)
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(texto)
+                    .then(() => {
+                        mostrarNotificacion('Texto copiado al portapapeles');
+                    })
+                    .catch(() => {
+                        // Si falla, usar método alternativo
+                        copiarConTextarea(texto);
+                    });
+            } else {
+                // Método 2: Usar textarea (funciona en HTTP)
+                copiarConTextarea(texto);
+            }
+        }
+
+        // Método alternativo usando textarea (funciona en cualquier contexto)
+        function copiarConTextarea(texto) {
+            const textarea = document.createElement('textarea');
+            textarea.value = texto;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-999999px';
+            textarea.style.top = '-999999px';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            
+            try {
+                const exitoso = document.execCommand('copy');
+                if (exitoso) {
+                    mostrarNotificacion('Texto copiado al portapapeles');
+                } else {
+                    mostrarNotificacion('Error al copiar', true);
+                }
+            } catch (error) {
+                mostrarNotificacion('Error al copiar', true);
+            }
+            
+            document.body.removeChild(textarea);
+        }
 
         // Función para mostrar notificación
         function mostrarNotificacion(mensaje, error = false) {
+            // Remover notificación anterior si existe
+            const notifAnterior = document.querySelector('.copied-notification');
+            if (notifAnterior) {
+                document.body.removeChild(notifAnterior);
+            }
+
             const notification = document.createElement('div');
             notification.className = 'copied-notification';
-            notification.textContent = mensaje;
             if (error) {
-                notification.style.background = '#e74c3c';
+                notification.classList.add('error');
             }
+            
+            notification.innerHTML = `<span>${mensaje}</span>`;
+            
             document.body.appendChild(notification);
 
             setTimeout(() => {
-                notification.style.animation = 'slideInUp 0.3s ease reverse';
+                notification.style.animation = 'slideOutRight 0.3s ease';
                 setTimeout(() => {
-                    document.body.removeChild(notification);
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
                 }, 300);
             }, 2000);
         }
@@ -523,11 +323,11 @@
                 html = `
                     <div class="preview-section">
                         <div class="preview-label">Con fuente Braille</div>
-                        <div class="preview-text">${textoBraille}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)">${textoBraille}</div>
                     </div>
                     <div class="preview-section">
                         <div class="preview-label">Sin fuente Braille</div>
-                        <div class="preview-text">${textoOriginal}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)">${textoOriginal}</div>
                     </div>
                 `;
             } else {
@@ -535,11 +335,11 @@
                     <div class="preview-section">
                         <h3>Imagen espejo (para escribir con punzón)</h3>
                         <div class="preview-label">Texto invertido horizontalmente</div>
-                        <div class="preview-text mirror-text">${textoBraille}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)"><span class="mirror-text">${textoBraille}</span></div>
                     </div>
                     <div class="preview-section">
                         <div class="preview-label">Texto original (referencia)</div>
-                        <div class="preview-text">${textoOriginal}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)">${textoOriginal}</div>
                     </div>
                 `;
             }
@@ -570,23 +370,23 @@
                 html = `
                     <div class="preview-section">
                         <div class="preview-label">Con fuente Braille</div>
-                        <div class="preview-text">${textoBraille}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)">${textoBraille}</div>
                     </div>
                     <div class="preview-section">
                         <div class="preview-label">Sin fuente Braille</div>
-                        <div class="preview-text">${textoConvertido}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)">${textoConvertido}</div>
                     </div>
                 `;
             } else {
                 html = `
                     <div class="preview-section">
-                        <h3>📝 Imagen espejo (para escribir con punzón)</h3>
+                        <h3>Imagen espejo (para escribir con punzón)</h3>
                         <div class="preview-label">Texto invertido horizontalmente</div>
-                        <div class="preview-text mirror-text">${textoBraille}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)"><span class="mirror-text">${textoBraille}</span></div>
                     </div>
                     <div class="preview-section">
                         <div class="preview-label">Texto original (referencia)</div>
-                        <div class="preview-text">${textoConvertido}</div>
+                        <div class="preview-text" onclick="copiarTextoPreview(this)">${textoConvertido}</div>
                     </div>
                 `;
             }
@@ -597,6 +397,12 @@
 
         function cerrarModal() {
             document.getElementById('preview-modal').style.display = 'none';
+        }
+
+        // Función para copiar texto desde la vista previa
+        function copiarTextoPreview(elemento) {
+            const texto = elemento.textContent;
+            copiarAlPortapapeles(texto);
         }
 
         function imprimirContenido() {
