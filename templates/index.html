@@ -65,16 +65,13 @@
 
             <!-- Pestaña Braille a Texto -->
             <div id="braille-texto-tab" class="tab-content" style="display: none;">
+
                 <p class="page-subtitle" style="text-align: center; margin-bottom: 1.5rem;">
-                    Escribe o pega el texto en Braille para convertirlo a texto normal.
+                    Escribe o pega el texto en Braille o usa las casillas para formar un carácter Braille.
                 </p>
 
                 <div class="converter-content">
-                    <textarea 
-                        id="braille-input" 
-                        placeholder="Escribe aquí en Braille... (⠓⠕⠇⠁)"
-                    ></textarea>
-
+                    <div id="casillas-braille" style="margin:1rem 0; text-align:center;"></div>
                     <div id="texto-output" class="braille-output empty"></div>
                 </div>
 
@@ -114,6 +111,73 @@
     </footer>
 
     <script>
+        // --- Casillas Braille para Braille a Texto ---
+        let casillasBrailleEstado = Array(9).fill(false);
+        let casillasRenderizadas = false;
+
+        function renderizarCasillasBraille() {
+            if (casillasRenderizadas) return;
+            const contenedor = document.getElementById('casillas-braille');
+            // Usar el div existente como cuadro gris y centrar el contenido
+            contenedor.innerHTML = '';
+            // Todos los estilos van en CSS
+            const wrapper = document.createElement('div');
+            wrapper.className = 'braille-casillas-wrapper';
+            for (let i = 0; i < 9; i++) {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'casilla-braille-' + (i+1);
+                checkbox.className = 'braille-casilla';
+                checkbox.checked = casillasBrailleEstado[i];
+                checkbox.addEventListener('change', (e) => {
+                    casillasBrailleEstado[i] = e.target.checked;
+                    actualizarBrailleInputDesdeCasillas();
+                });
+                wrapper.appendChild(checkbox);
+            }
+            contenedor.appendChild(wrapper);
+            casillasRenderizadas = true;
+        }
+
+        function actualizarBrailleInputDesdeCasillas() {
+            // Solo usar los primeros 6 puntos para Braille estándar
+            let valor = 0;
+            for (let i = 0; i < 6; i++) {
+                if (casillasBrailleEstado[i]) valor |= (1 << i);
+            }
+            const unicodeBraille = String.fromCharCode(0x2800 + valor);
+            const brailleInput = document.getElementById('braille-input');
+            let texto = brailleInput.value;
+            if (texto.length > 0 && texto.charCodeAt(texto.length-1) >= 0x2800 && texto.charCodeAt(texto.length-1) <= 0x28FF) {
+                texto = texto.slice(0, -1) + unicodeBraille;
+            } else {
+                texto += unicodeBraille;
+            }
+            brailleInput.value = texto;
+            brailleInput.dispatchEvent(new Event('input'));
+        }
+
+        function limpiarCasillasBraille() {
+            casillasBrailleEstado.fill(false);
+            for (let i = 0; i < 9; i++) {
+                const casilla = document.getElementById('casilla-braille-' + (i+1));
+                if (casilla) casilla.checked = false;
+            }
+        }
+
+        // Renderizar casillas al mostrar la pestaña
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.dataset.tab === 'braille-texto') {
+                    setTimeout(renderizarCasillasBraille, 50);
+                }
+            });
+        });
+
+        // Renderizar casillas inmediatamente si la pestaña braille-texto está activa
+        if (document.getElementById('braille-texto-tab').style.display !== 'none') {
+            renderizarCasillasBraille();
+        }
         const textoInput = document.getElementById('texto-input');
         const brailleOutput = document.getElementById('braille-output');
         const brailleInput = document.getElementById('braille-input');
