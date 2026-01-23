@@ -10,6 +10,7 @@ app = Flask(__name__, static_folder='static')
 # ================= DICCIONARIOS BRAILLE =================
 
 BRAILLE_MAP = {
+
     'a': '⠁','b': '⠃','c': '⠉','d': '⠙','e': '⠑',
     'f': '⠋','g': '⠛','h': '⠓','i': '⠊','j': '⠚',
     'k': '⠅','l': '⠇','m': '⠍','n': '⠝','o': '⠕',
