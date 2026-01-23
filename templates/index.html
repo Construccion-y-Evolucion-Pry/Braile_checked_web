@@ -1,499 +1,617 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>BraiLator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Estilos -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-
-<header>
-    <div class="header-content">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
         <a href="/" class="logo">
-            <span class="logo-icon">⠃</span>
-            BraiLator
+          <span class="logo-icon">⠃</span>
+          BraiLator
         </a>
         <nav>
-            <ul>
-                <li><a href="/" class="active">Traductor</a></li>
-                <li><a href="/contexto">Contexto</a></li>
-                <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
-            </ul>
+          <ul>
+            <li><a href="/" class="active">Traductor</a></li>
+            <li><a href="#" id="btn-tour">Tour ❓</a></li>
+            <li><a href="/contexto">Contexto</a></li>
+            <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+          </ul>
         </nav>
-    </div>
-</header>
+      </div>
+    </header>
 
-<main class="container">
-
-    <div class="page-title">
+    <main class="container">
+      <div class="page-title">
         <h1>BraiLator</h1>
         <div class="braille-decoration">⠃⠗⠇</div>
         <p class="page-subtitle">
-            Traducción bidireccional entre texto y Braille
+          Traducción bidireccional entre texto y Braille
         </p>
-    </div>
+      </div>
 
-    <section class="translator-container">
-
+      <section class="translator-container">
         <!-- TABS -->
         <div class="tabs">
-            <button class="tab-btn active" data-tab="texto-braille">Texto → Braille</button>
-            <button class="tab-btn" data-tab="braille-texto">Braille → Texto</button>
+          <button class="tab-btn active" data-tab="texto-braille">
+            Texto → Braille
+          </button>
+          <button class="tab-btn" data-tab="braille-texto">
+            Braille → Texto
+          </button>
         </div>
 
         <!-- ================= TEXTO → BRAILLE ================= -->
         <section id="texto-braille-tab" class="tab-content">
-            <div class="converter-content">
-                <textarea id="texto-input"
-                          placeholder="Escribe aquí tu texto..."></textarea>
+          <div class="converter-content">
+            <textarea
+              id="texto-input"
+              placeholder="Escribe aquí tu texto..."
+            ></textarea>
 
-                <div id="braille-output" class="braille-output empty"></div>
-            </div>
+            <div id="braille-output" class="braille-output empty"></div>
+          </div>
         </section>
 
         <!-- ================= BRAILLE → TEXTO ================= -->
-        <section id="braille-texto-tab" class="tab-content" style="display:none">
+        <section
+          id="braille-texto-tab"
+          class="tab-content"
+          style="display: none"
+        >
+          <p id="ayuda-modo-braille" class="page-subtitle">
+            Selecciona un modo y marca las casillas Braille o pega caracteres
+            Unicode
+          </p>
 
-            <p id="ayuda-modo-braille" class="page-subtitle">
-                Selecciona un modo y marca las casillas Braille o pega caracteres Unicode
-            </p>
+          <!-- Botones de modo -->
+          <div class="print-buttons">
+            <button
+              id="btn-modo-letra"
+              class="modo-braille-btn modo-letra-activo"
+            >
+              Modo Letra (9)
+            </button>
 
-            <!-- Botones de modo -->
-            <div class="print-buttons">
-                <button id="btn-modo-letra"
-                        class="modo-braille-btn modo-letra-activo">
-                    Modo Letra (9)
-                </button>
+            <button id="btn-modo-numero" class="modo-braille-btn">
+              Modo Número (6)
+            </button>
 
-                <button id="btn-modo-numero"
-                        class="modo-braille-btn">
-                    Modo Número (6)
-                </button>
+            <button id="btn-modo-caracter" class="modo-braille-btn">
+              Modo Carácter (3)
+            </button>
+          </div>
 
-                <button id="btn-modo-caracter"
-                        class="modo-braille-btn">
-                    Modo Carácter (3)
-                </button>
+          <!-- Casillas Braille -->
+          <div id="casillas-braille" style="position: relative;">
+            <div class="side-controls">
+              <button id="btn-block-mayus" class="modo-braille-btn">
+                Block Mayus
+              </button>
             </div>
+            <div class="braille-casillas-wrapper"></div>
 
-            <!-- Casillas Braille -->
-            <div id="casillas-braille">
-                <div class="braille-casillas-wrapper"></div>
+            <!-- Tooltip del Tour -->
+            <div id="tour-tooltip" class="tour-tooltip" style="display: none;">
+                <button class="close-tour">×</button>
+                <h3>⌨️ Mapeo de Teclado (Numpad)</h3>
+                <p>Usa tu teclado numérico para marcar los puntos:</p>
+                <div class="numpad-grid">
+                    <div class="numpad-cell">7 ➝ ●1</div>
+                    <div class="numpad-cell">8 ➝ ●4</div>
+                    <div class="numpad-cell">4 ➝ ●2</div>
+                    <div class="numpad-cell">5 ➝ ●5</div>
+                    <div class="numpad-cell">1 ➝ ●3</div>
+                    <div class="numpad-cell">2 ➝ ●6</div>
+                </div>
+                <p class="tour-note">El punto 1 comienza arriba a la izquierda.</p>
             </div>
+          </div>
 
-            <!-- Entrada Braille -->
-            <textarea id="braille-palabra"
-                      placeholder="Escribe o pega aquí Braille Unicode (⠃⠗⠇)"></textarea>
+          <!-- Entrada Braille -->
+          <textarea
+            id="braille-palabra"
+            placeholder="Escribe o pega aquí Braille Unicode (⠃⠗⠇)"
+          ></textarea>
 
-            <!-- Traducción -->
-            <div class="converter-content">
-                <label for="traduccion-palabra">
-                    Traducción a texto:
-                </label>
-                <input id="traduccion-palabra"
-                       type="text"
-                       readonly>
-            </div>
+          <!-- Traducción -->
+          <div class="converter-content">
+            <label for="traduccion-palabra"> Traducción a texto: </label>
+            <input id="traduccion-palabra" type="text" readonly />
+          </div>
 
-            
-            <!-- Descargas -->
-            <div class="print-buttons">
-                <button id="btn-descargar-texto" class="print-btn">
-                    Descargar Texto
-                </button>
-                <button id="btn-descargar-braille" class="print-btn">
-                    Descargar Word Braille (Espejo)
-                </button>
-            </div>
-
+          <!-- Descargas -->
+          <div class="print-buttons">
+            <button id="btn-descargar-texto" class="print-btn">
+              Descargar Texto
+            </button>
+            <button id="btn-descargar-braille" class="print-btn">
+              Descargar Word Braille (Espejo)
+            </button>
+          </div>
         </section>
+      </section>
+    </main>
 
-    </section>
-</main>
+    <footer>BraiLator · Inclusión y accesibilidad</footer>
 
-<footer>
-    BraiLator · Inclusión y accesibilidad
-</footer>
-
-<script>
-/* =====================================================
+    <script>
+      /* =====================================================
    TABS
 ===================================================== */
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.onclick = () => {
-        document.querySelectorAll('.tab-btn')
-            .forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.onclick = () => {
+          document
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
 
-        document.querySelectorAll('.tab-content')
-            .forEach(t => t.style.display = 'none');
+          document
+            .querySelectorAll(".tab-content")
+            .forEach((t) => (t.style.display = "none"));
 
-        document.getElementById(btn.dataset.tab + '-tab')
-            .style.display = 'block';
+          document.getElementById(btn.dataset.tab + "-tab").style.display =
+            "block";
 
-        if (btn.dataset.tab === 'braille-texto') {
+          if (btn.dataset.tab === "braille-texto") {
             renderizarCasillasBraille();
-        }
-    };
-});
+          }
+        };
+      });
 
-/* =====================================================
+      /* =====================================================
    TEXTO → BRAILLE
 ===================================================== */
-document.getElementById('texto-input').addEventListener('input', async e => {
-    const out = document.getElementById('braille-output');
+      document
+        .getElementById("texto-input")
+        .addEventListener("input", async (e) => {
+          const out = document.getElementById("braille-output");
 
-    if (!e.target.value) {
-        out.textContent = '';
-        out.classList.add('empty');
-        return;
-    }
+          if (!e.target.value) {
+            out.textContent = "";
+            out.classList.add("empty");
+            return;
+          }
 
-    try {
-        const res = await fetch('/convertir', {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ texto: e.target.value })
+          try {
+            const res = await fetch("/convertir", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ texto: e.target.value }),
+            });
+
+            const data = await res.json();
+            out.textContent = data.texto_braille;
+            out.classList.remove("empty");
+          } catch {
+            out.textContent = "Error de conexión";
+          }
         });
 
-        const data = await res.json();
-        out.textContent = data.texto_braille;
-        out.classList.remove('empty');
-
-    } catch {
-        out.textContent = 'Error de conexión';
-    }
-});
-
-/* =====================================================
+      /* =====================================================
    BRAILLE → TEXTO
 ===================================================== */
-let modoBraille = 'letra';
-let palabraBraille = '';
-let puntosActivos = Array(6).fill(false);
-let casillasYaRenderizadas = false;
+      let modoBraille = "letra";
+      let mayusActivo = false;
+      let palabraBraille = "";
+      let puntosActivos = Array(6).fill(false);
+      let casillasYaRenderizadas = false;
 
-// Mapeo correcto del numpad para patrón 2×3:
-// Braille estándar:  7 8
-//                    4 5
-//                    1 2
-// Índices internos:  0 3
-//                    1 4
-//                    2 5
-const numpadMap = { 
-    '7': 0,  // Punto 1 (arriba izquierda)
-    '4': 1,  // Punto 2 (medio izquierda)
-    '1': 2,  // Punto 3 (abajo izquierda)
-    '8': 3,  // Punto 4 (arriba derecha)
-    '5': 4,  // Punto 5 (medio derecha)
-    '2': 5   // Punto 6 (abajo derecha)
-};
+      // Mapeo correcto del numpad para patrón 2×3:
+      // Braille estándar:  7 8
+      //                    4 5
+      //                    1 2
+      // Índices internos:  0 3
+      //                    1 4
+      //                    2 5
+      const numpadMap = {
+        7: 0, // Punto 1 (arriba izquierda)
+        4: 1, // Punto 2 (medio izquierda)
+        1: 2, // Punto 3 (abajo izquierda)
+        8: 3, // Punto 4 (arriba derecha)
+        5: 4, // Punto 5 (medio derecha)
+        2: 5, // Punto 6 (abajo derecha)
+      };
 
-function actualizarBotonesModo() {
-    document.getElementById('btn-modo-letra')
-        .classList.toggle('modo-letra-activo', modoBraille === 'letra');
-    document.getElementById('btn-modo-numero')
-        .classList.toggle('modo-numero-activo', modoBraille === 'numero');
-    document.getElementById('btn-modo-caracter')
-        .classList.toggle('modo-caracter-activo', modoBraille === 'especial');
-}
+      function actualizarBotonesModo() {
+        document
+          .getElementById("btn-modo-letra")
+          .classList.toggle("modo-letra-activo", modoBraille === "letra");
+        document
+          .getElementById("btn-modo-numero")
+          .classList.toggle("modo-numero-activo", modoBraille === "numero");
+        document
+          .getElementById("btn-modo-caracter")
+          .classList.toggle("modo-caracter-activo", modoBraille === "especial");
+      }
 
-function mostrarAyudaModoBraille() {
-    const textos = {
-        'numero': 'Modo NÚMERO activo (6) - Presiona Enter para confirmar cada carácter',
-        'especial': 'Modo CARÁCTER ESPECIAL activo (3) - Presiona Enter para confirmar',
-        'letra': 'Modo LETRA activo (9) - Presiona Enter para confirmar cada letra'
-    };
-    document.getElementById('ayuda-modo-braille').textContent = textos[modoBraille];
-}
+      function mostrarAyudaModoBraille() {
+        const textos = {
+          numero:
+            "Modo NÚMERO activo (6) - Presiona Enter para confirmar cada carácter",
+          especial:
+            "Modo CARÁCTER ESPECIAL activo (3) - Presiona Enter para confirmar",
+          letra:
+            "Modo LETRA activo (9) - Presiona Enter para confirmar cada letra",
+        };
+        document.getElementById("ayuda-modo-braille").textContent =
+          textos[modoBraille];
+      }
 
-function renderizarCasillasBraille() {
-    if (casillasYaRenderizadas) return;
-    
-    const wrapper = document.querySelector('.braille-casillas-wrapper');
-    wrapper.innerHTML = ''; // Limpiar por si acaso
+      function renderizarCasillasBraille() {
+        if (casillasYaRenderizadas) return;
 
-    // Crear 6 casillas en patrón 2×3
-    // El CSS debe tener: display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr);
-    for (let fila = 0; fila < 3; fila++) {
-        for (let col = 0; col < 2; col++) {
-            const idx = col * 3 + fila;  // 0,1,2 (izq) | 3,4,5 (der)
-            
-            const cb = document.createElement('input');
-            cb.type = 'checkbox';
-            cb.className = 'braille-casilla';
+        const wrapper = document.querySelector(".braille-casillas-wrapper");
+        wrapper.innerHTML = ""; // Limpiar por si acaso
+
+        // Crear 6 casillas en patrón 2×3
+        // El CSS debe tener: display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr);
+        for (let fila = 0; fila < 3; fila++) {
+          for (let col = 0; col < 2; col++) {
+            const idx = col * 3 + fila; // 0,1,2 (izq) | 3,4,5 (der)
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.className = "braille-casilla";
             cb.id = `casilla-${idx}`;
             cb.checked = puntosActivos[idx];
-            
-            cb.addEventListener('change', e => {
-                puntosActivos[idx] = e.target.checked;
+
+            cb.addEventListener("change", (e) => {
+              puntosActivos[idx] = e.target.checked;
             });
-            
+
             wrapper.appendChild(cb);
+          }
         }
-    }
-    
-    casillasYaRenderizadas = true;
-}
 
-function generarCaracterBraille() {
-    let valor = 0;
-    for (let i = 0; i < 6; i++) {
-        if (puntosActivos[i]) {
-            valor |= (1 << i);
+        casillasYaRenderizadas = true;
+      }
+
+      function generarCaracterBraille() {
+        let valor = 0;
+        for (let i = 0; i < 6; i++) {
+          if (puntosActivos[i]) {
+            valor |= 1 << i;
+          }
         }
-    }
-    return String.fromCharCode(0x2800 + valor);
-}
+        return String.fromCharCode(0x2800 + valor);
+      }
 
-function limpiarPuntos() {
-    puntosActivos.fill(false);
-    document.querySelectorAll('.braille-casilla')
-        .forEach(cb => cb.checked = false);
-}
+      function limpiarPuntos() {
+        puntosActivos.fill(false);
+        document
+          .querySelectorAll(".braille-casilla")
+          .forEach((cb) => (cb.checked = false));
+      }
 
-async function validarYAgregar(caracterBraille) {
-    // Si no hay ningún punto marcado (carácter vacío ⠀), no validar
-    if (caracterBraille === '\u2800') {
-        mostrarMensajeValidacion('No has marcado ningún punto', 'error');
-        return;
-    }
-    
-    try {
-        const res = await fetch('/validar-braille', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ 
-                braille: caracterBraille,
-                modo: modoBraille 
-            })
-        });
+      async function validarYAgregar(caracterBraille) {
+        // Si no hay ningún punto marcado (carácter vacío ⠀), no validar
+        if (caracterBraille === "\u2800") {
+          mostrarMensajeValidacion("No has marcado ningún punto", "error");
+          return;
+        }
 
-        if (res.ok) {
+        try {
+          const res = await fetch("/validar-braille", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              braille: caracterBraille,
+              modo: modoBraille,
+            }),
+          });
+
+          if (res.ok) {
             // Validación exitosa, agregar el carácter
-            palabraBraille += caracterBraille;
-            document.getElementById('braille-palabra').value = palabraBraille;
+            let prefijo = "";
+            if (mayusActivo) {
+              prefijo = "\u2828";
+            }
+            palabraBraille += prefijo + caracterBraille;
+            document.getElementById("braille-palabra").value = palabraBraille;
             traducirBraille();
             limpiarPuntos();
-            mostrarMensajeValidacion('Carácter agregado correctamente', 'success');
-        } else {
+            mostrarMensajeValidacion(
+              "Carácter agregado correctamente",
+              "success",
+            );
+          } else {
             const data = await res.json();
-            mostrarMensajeValidacion(data.error || 'Carácter Braille no válido', 'error');
+            mostrarMensajeValidacion(
+              data.error || "Carácter Braille no válido",
+              "error",
+            );
+          }
+        } catch (error) {
+          mostrarMensajeValidacion("Error de conexión al validar", "error");
         }
-    } catch (error) {
-        mostrarMensajeValidacion('Error de conexión al validar', 'error');
-    }
-}
+      }
 
-function mostrarMensajeValidacion(mensaje, tipo) {
-    // Eliminar mensaje anterior si existe
-    const msgAnterior = document.querySelector('.mensaje-validacion');
-    if (msgAnterior) {
-        msgAnterior.remove();
-    }
-    
-    // Crear nuevo mensaje
-    const div = document.createElement('div');
-    div.className = `mensaje-validacion mensaje-${tipo}`;
-    div.textContent = mensaje;
-    
-    // Insertar después de las casillas
-    const casillas = document.getElementById('casillas-braille');
-    casillas.parentNode.insertBefore(div, casillas.nextSibling);
-    
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        if (div.parentNode) {
-            div.style.opacity = '0';
+      function mostrarMensajeValidacion(mensaje, tipo) {
+        // Eliminar mensaje anterior si existe
+        const msgAnterior = document.querySelector(".mensaje-validacion");
+        if (msgAnterior) {
+          msgAnterior.remove();
+        }
+
+        // Crear nuevo mensaje
+        const div = document.createElement("div");
+        div.className = `mensaje-validacion mensaje-${tipo}`;
+        div.textContent = mensaje;
+
+        // Insertar después de las casillas
+        const casillas = document.getElementById("casillas-braille");
+        casillas.parentNode.insertBefore(div, casillas.nextSibling);
+
+        // Remover después de 3 segundos
+        setTimeout(() => {
+          if (div.parentNode) {
+            div.style.opacity = "0";
             setTimeout(() => div.remove(), 300);
+          }
+        }, 3000);
+      }
+
+      async function traducirBraille() {
+        const traduccionInput = document.getElementById("traduccion-palabra");
+
+        if (!palabraBraille.trim()) {
+          traduccionInput.value = "";
+          return;
         }
-    }, 3000);
-}
 
-async function traducirBraille() {
-    const traduccionInput = document.getElementById('traduccion-palabra');
-    
-    if (!palabraBraille.trim()) {
-        traduccionInput.value = '';
-        return;
-    }
+        try {
+          const res = await fetch("/convertir-braille", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ braille: palabraBraille }),
+          });
 
-    try {
-        const res = await fetch('/convertir-braille', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ braille: palabraBraille })
+          const data = await res.json();
+          traduccionInput.value = data.texto || "";
+        } catch (error) {
+          traduccionInput.value = "Error de conexión";
+        }
+      }
+
+      /* === LISTENERS DE BOTONES DE MODO === */
+      document
+        .getElementById("btn-modo-letra")
+        .addEventListener("click", () => {
+          modoBraille = "letra";
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
         });
 
-        const data = await res.json();
-        traduccionInput.value = data.texto || '';
-    } catch (error) {
-        traduccionInput.value = 'Error de conexión';
-    }
-}
+      document
+        .getElementById("btn-modo-numero")
+        .addEventListener("click", () => {
+          modoBraille = "numero";
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
 
-/* === LISTENERS DE BOTONES DE MODO === */
-document.getElementById('btn-modo-letra').addEventListener('click', () => {
-    modoBraille = 'letra';
-    actualizarBotonesModo();
-    mostrarAyudaModoBraille();
-});
-
-document.getElementById('btn-modo-numero').addEventListener('click', () => {
-    modoBraille = 'numero';
-    actualizarBotonesModo();
-    mostrarAyudaModoBraille();
-    
-    // Agregar signo de número si no existe al final
-    if (!palabraBraille || palabraBraille[palabraBraille.length - 1] !== '\u283C') {
-        palabraBraille += '\u283C';
-        document.getElementById('braille-palabra').value = palabraBraille;
-        traducirBraille();
-    }
-});
-
-document.getElementById('btn-modo-caracter').addEventListener('click', () => {
-    modoBraille = 'especial';
-    actualizarBotonesModo();
-    mostrarAyudaModoBraille();
-});
-
-/* === PEGAR / EDITAR BRAILLE MANUALMENTE === */
-document.getElementById('braille-palabra').addEventListener('input', e => {
-    palabraBraille = e.target.value;
-    traducirBraille();
-});
-
-/* === TECLADO NUMPAD === */
-document.addEventListener('keydown', e => {
-    // Solo actuar si estamos en la pestaña Braille → Texto
-    const tab = document.getElementById('braille-texto-tab');
-    if (!tab || tab.style.display === 'none') return;
-
-    // Cambiar modo con teclas 9, 6, 3
-    if (e.key === '9') {
-        e.preventDefault();
-        modoBraille = 'letra';
-        actualizarBotonesModo();
-        mostrarAyudaModoBraille();
-        return;
-    }
-    
-    if (e.key === '6') {
-        e.preventDefault();
-        modoBraille = 'numero';
-        actualizarBotonesModo();
-        mostrarAyudaModoBraille();
-        
-        // Agregar signo de número
-        if (!palabraBraille || palabraBraille[palabraBraille.length - 1] !== '\u283C') {
-            palabraBraille += '\u283C';
-            document.getElementById('braille-palabra').value = palabraBraille;
+          // Agregar signo de número si no existe al final
+          if (
+            !palabraBraille ||
+            palabraBraille[palabraBraille.length - 1] !== "\u283C"
+          ) {
+            palabraBraille += "\u283C";
+            document.getElementById("braille-palabra").value = palabraBraille;
             traducirBraille();
-        }
-        return;
-    }
-    
-    if (e.key === '3') {
-        e.preventDefault();
-        modoBraille = 'especial';
-        actualizarBotonesModo();
-        mostrarAyudaModoBraille();
-        return;
-    }
+          }
+        });
 
-    // Marcar/desmarcar casillas con numpad
-    if (numpadMap[e.key] !== undefined) {
-        e.preventDefault();
-        const idx = numpadMap[e.key];
-        puntosActivos[idx] = !puntosActivos[idx];
-        
-        const casilla = document.getElementById(`casilla-${idx}`);
-        if (casilla) {
+      document
+        .getElementById("btn-modo-caracter")
+        .addEventListener("click", () => {
+          modoBraille = "especial";
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
+        });
+
+      document
+        .getElementById("btn-block-mayus")
+        .addEventListener("click", () => {
+          mayusActivo = !mayusActivo;
+          document
+            .getElementById("btn-block-mayus")
+            .classList.toggle("modo-mayus-activo", mayusActivo);
+        });
+
+      // Sincronizar con tecla física Bloq Mayús
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "CapsLock") {
+            // Solo activar/desactivar si estamos en MODO LETRA
+            if (modoBraille === 'letra') {
+                const estado = e.getModifierState("CapsLock");
+                mayusActivo = estado; 
+                document.getElementById("btn-block-mayus").classList.toggle("modo-mayus-activo", mayusActivo);
+            }
+        }
+      });
+
+      // También chequear al iniciar o al enfocar la ventana por si ya venía activado
+      /* === LOGICA DEL TOUR === */
+      const btnTour = document.getElementById("btn-tour");
+      const tourTooltip = document.getElementById("tour-tooltip");
+      const closeTour = document.querySelector(".close-tour");
+      const casillasContainer = document.getElementById("casillas-braille");
+
+      function toggleTour() {
+          const isHidden = tourTooltip.style.display === "none";
+          tourTooltip.style.display = isHidden ? "block" : "none";
+          
+          if (isHidden) {
+              // Asegurar que estamos en la pestaña correcta
+              document.querySelector('[data-tab="braille-texto"]').click();
+              casillasContainer.classList.add("tour-active");
+          } else {
+              casillasContainer.classList.remove("tour-active");
+          }
+      }
+
+      btnTour.addEventListener("click", (e) => {
+          e.preventDefault();
+          toggleTour();
+      });
+
+      closeTour.addEventListener("click", toggleTour);
+
+      /* === PEGAR / EDITAR BRAILLE MANUALMENTE === */
+      document
+        .getElementById("braille-palabra")
+        .addEventListener("input", (e) => {
+          palabraBraille = e.target.value;
+          traducirBraille();
+        });
+
+      /* === TECLADO NUMPAD === */
+      document.addEventListener("keydown", (e) => {
+        // Solo actuar si estamos en la pestaña Braille → Texto
+        const tab = document.getElementById("braille-texto-tab");
+        if (!tab || tab.style.display === "none") return;
+
+        // Cambiar modo con teclas 9, 6, 3
+        if (e.key === "9") {
+          e.preventDefault();
+          modoBraille = "letra";
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
+          return;
+        }
+
+        if (e.key === "6") {
+          e.preventDefault();
+          modoBraille = "numero";
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
+
+          // Agregar signo de número
+          if (
+            !palabraBraille ||
+            palabraBraille[palabraBraille.length - 1] !== "\u283C"
+          ) {
+            palabraBraille += "\u283C";
+            document.getElementById("braille-palabra").value = palabraBraille;
+            traducirBraille();
+          }
+          return;
+        }
+
+        if (e.key === "3") {
+          e.preventDefault();
+          modoBraille = "especial";
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
+          return;
+        }
+
+        // Marcar/desmarcar casillas con numpad
+        if (numpadMap[e.key] !== undefined) {
+          e.preventDefault();
+          const idx = numpadMap[e.key];
+          puntosActivos[idx] = !puntosActivos[idx];
+
+          const casilla = document.getElementById(`casilla-${idx}`);
+          if (casilla) {
             casilla.checked = puntosActivos[idx];
+          }
         }
-    }
 
-    // Enter: confirmar letra y agregar a palabra
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        
-        const caracterBraille = generarCaracterBraille();
-        
-        // Validar antes de agregar
-        validarYAgregar(caracterBraille);
-    }
+        // Enter: confirmar letra y agregar a palabra
+        if (e.key === "Enter") {
+          e.preventDefault();
 
-    // Escape: limpiar todo
-    if (e.key === 'Escape') {
-        e.preventDefault();
-        palabraBraille = '';
-        document.getElementById('braille-palabra').value = '';
-        document.getElementById('traduccion-palabra').value = '';
-        limpiarPuntos();
-        
-        // Volver a modo letra
-        modoBraille = 'letra';
-        actualizarBotonesModo();
-        mostrarAyudaModoBraille();
-    }
-});
+          const caracterBraille = generarCaracterBraille();
 
-/* =====================================================
+          // Validar antes de agregar
+          validarYAgregar(caracterBraille);
+        }
+
+        // Escape: limpiar todo
+        if (e.key === "Escape") {
+          e.preventDefault();
+          palabraBraille = "";
+          document.getElementById("braille-palabra").value = "";
+          document.getElementById("traduccion-palabra").value = "";
+          limpiarPuntos();
+
+          // Volver a modo letra
+          modoBraille = "letra";
+          mayusActivo = false;
+          document
+            .getElementById("btn-block-mayus")
+            .classList.remove("modo-mayus-activo");
+          actualizarBotonesModo();
+          mostrarAyudaModoBraille();
+        }
+      });
+
+      /* =====================================================
    DESCARGAS
 ===================================================== */
-document.getElementById('btn-descargar-texto').addEventListener('click', () => {
-    const contenido = document.getElementById('traduccion-palabra').value;
-    
-    if (!contenido) {
-        alert('No hay texto para descargar');
-        return;
-    }
-    
-    const blob = new Blob([contenido], { type: 'text/plain;charset=utf-8' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'traduccion.txt';
-    a.click();
-    URL.revokeObjectURL(a.href);
-});
+      document
+        .getElementById("btn-descargar-texto")
+        .addEventListener("click", () => {
+          const contenido = document.getElementById("traduccion-palabra").value;
 
-document.getElementById('btn-descargar-braille').addEventListener('click', async () => {
-    const braille = palabraBraille;
-    const texto = document.getElementById('traduccion-palabra').value;
-    
-    if (!braille) {
-        alert('No hay contenido Braille para descargar');
-        return;
-    }
-    
-    try {
-        const res = await fetch('/descargar-braille-word', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ braille, texto })
+          if (!contenido) {
+            alert("No hay texto para descargar");
+            return;
+          }
+
+          const blob = new Blob([contenido], {
+            type: "text/plain;charset=utf-8",
+          });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "traduccion.txt";
+          a.click();
+          URL.revokeObjectURL(a.href);
         });
-        
-        const blob = await res.blob();
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'braille_para_perforar.docx';
-        a.click();
-        URL.revokeObjectURL(a.href);
-    } catch (error) {
-        alert('Error al generar el archivo Word');
-    }
-});
 
-/* =====================================================
+      document
+        .getElementById("btn-descargar-braille")
+        .addEventListener("click", async () => {
+          const braille = palabraBraille;
+          const texto = document.getElementById("traduccion-palabra").value;
+
+          if (!braille) {
+            alert("No hay contenido Braille para descargar");
+            return;
+          }
+
+          try {
+            const res = await fetch("/descargar-braille-word", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ braille, texto }),
+            });
+
+            const blob = await res.blob();
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "braille_para_perforar.docx";
+            a.click();
+            URL.revokeObjectURL(a.href);
+          } catch (error) {
+            alert("Error al generar el archivo Word");
+          }
+        });
+
+      /* =====================================================
    INICIALIZACIÓN
 ===================================================== */
-mostrarAyudaModoBraille();
-actualizarBotonesModo();
-</script>
-
-</body>
+      mostrarAyudaModoBraille();
+      actualizarBotonesModo();
+    </script>
+  </body>
 </html>
