@@ -35,6 +35,7 @@ Este documento propone un conjunto de pruebas (unitarias, de integración y manu
 
 Recomendado usar `pytest`.
 AGREGAR IMAGENES
+
 - Caso: letras minusculas
   - Entrada: `"abcxyz"`
   - Esperado: cada caracter mapeado correctamente según `BRAILLE_MAP`.
@@ -55,10 +56,11 @@ AGREGAR IMAGENES
   - Entrada: `""`
   - Esperado: `""` (cadena vacía) o manejo definido.
 
+## Consideraciones
 
-## Consideraciones 
 Ejemplo de test (esqueleto):
 SI ES OPCINAL TDD
+
 ```python
 from app import texto_a_braille
 
@@ -73,54 +75,46 @@ def test_vacio():
 
 Manual o automatizado (Selenium / Playwright):
 
-### Caso E2E-001: Conversión básica de texto
+### Caso E2E-001: Conversión básica (Texto → Braille)
+
 - Abrir `http://localhost:5000`.
+- Asegurar que la pestaña "Texto → Braille" está activa.
 - Introducir texto en el `textarea`.
-- **Verificar**: La traducción a texto Braille es instantánea a la par que se introduce texto.
-- **Resultado esperado**: El texto Braille aparece en tiempo real.
+- **Verificar**: La traducción a texto Braille es instantánea en la sección inferior.
 
-### Caso E2E-002: Funcionalidad de copiar
-- Introducir texto: "Hola mundo".
-- Esperar a que se muestre el resultado en Braille.
-- Hacer clic en el botón "📋 Copiar".
-- **Verificar**: 
-  - El botón cambia a "✅ ¡Copiado!" temporalmente.
-  - El botón cambia de color a verde.
-  - Después de 2 segundos vuelve al estado original.
-- Pegar (Ctrl+V) en un editor de texto.
-- **Resultado esperado**: El texto en Braille se pega correctamente.
+### Caso E2E-002: Conversión Inversa (Braille → Texto)
 
-### Caso E2E-003: Exportar como PNG
-- Introducir texto: "Python 2024".
-- Esperar a que se muestre el resultado en Braille.
-- Hacer clic en el botón "🖼️ Exportar PNG".
-- **Verificar**:
-  - El botón muestra "⏳ Generando..." temporalmente.
-  - Se descarga un archivo PNG con nombre formato: `braille-traduccion-YYYY-MM-DD-HH-MM-SS.png`.
-  - El botón cambia a "✅ ¡Exportado!" en verde.
-  - Después de 2 segundos vuelve al estado original.
-- Abrir el archivo PNG descargado.
-- **Resultado esperado**: 
-  - La imagen contiene el título "Traducción a Braille".
-  - Muestra el texto original.
-  - Muestra el texto en Braille con fuente grande.
-  - Tiene el footer "Generado por BraiLator".
-  - Fondo blanco profesional.
+- Cambiar a la pestaña "Braille → Texto".
+- Marcar manualmente los puntos 1, 2, 3 (letra 'l') en las casillas.
+- Verificar que al completar, se puede confirmar.
+- O pegar texto braille unicode en el campo de entrada.
+- **Resultado esperado**: El campo "Traducción a texto" muestra la letra correspondiente.
 
-### Caso E2E-004: Validación de campos vacíos
-- No introducir texto (dejar vacío).
-- Intentar hacer clic en "Copiar".
-- **Resultado esperado**: Alerta "⚠️ No hay texto en Braille para copiar".
-- Intentar hacer clic en "Exportar PNG".
-- **Resultado esperado**: Alerta "⚠️ No hay texto en Braille para exportar".
+### Caso E2E-003: Exportar Word Espejo
+
+- En la pestaña "Braille → Texto" (o donde esté disponible el botón), escribir una palabra.
+- Clic en "Descargar Word Braille (Espejo)".
+- **Verificar**: Se descarga un archivo `.docx`.
+- Abrir archivo y validar:
+  - Título "BRAILLE PARA PERFORAR".
+  - Texto braille invertido (espejo).
+  - Página de referencia con texto original.
+
+### Caso E2E-004: Validación de Modos
+
+- Ir a pestaña "Braille → Texto".
+- Seleccionar "Modo Número".
+- Validar que al escribir se agrega automáticamente el prefijo numérico.
+- Intentar ingresar un patrón inválido para número (ej. puntos de una letra 'k' si no es válida como número).
+- **Esperado**: Mensaje de error o validación en pantalla.
 
 ### Caso E2E-005: Responsividad
+
 - Abrir la aplicación en diferentes tamaños de pantalla (desktop, tablet, mobile).
 - **Verificar**:
   - Los botones se reorganizan correctamente en pantallas pequeñas.
   - Los botones ocupan el ancho completo en móviles.
-  - Todas las funcionalidades siguen operativas. 
-
+  - Todas las funcionalidades siguen operativas.
 
 ## 4) Pruebas de accesibilidad
 
@@ -137,35 +131,37 @@ Manual o automatizado (Selenium / Playwright):
 - Limitar tamaño de payload para prevenir DoS.
 - Validar que la API no ejecuta código o realiza operaciones peligrosas con la entrada.
 
-
-
 ### Checklist de aceptación
 
 #### Funcionalidad Core
--  Conversión correcta para letras básicas.
--  API devuelve 400 para entradas vacías.
--  Conversión en tiempo real funciona correctamente.
+
+- Conversión correcta para letras básicas.
+- API devuelve 400 para entradas vacías.
+- Conversión en tiempo real funciona correctamente.
 - Aplicación arranca en entorno virtual con `pip install -r requirements.txt`.
--  Pruebas unitarias y de integración pasan en CI.
+- Pruebas unitarias y de integración pasan en CI.
 
 #### Funcionalidad de Copiar
--  Botón "Copiar" copia el texto Braille al portapapeles.
--  Feedback visual correcto (cambio a verde y texto "¡Copiado!").
--  Validación de campo vacío funciona (muestra alerta).
--  Funciona en Chrome, Firefox, Edge.
+
+- Botón "Copiar" copia el texto Braille al portapapeles.
+- Feedback visual correcto (cambio a verde y texto "¡Copiado!").
+- Validación de campo vacío funciona (muestra alerta).
+- Funciona en Chrome, Firefox, Edge.
 
 #### Funcionalidad de Exportar PNG
--  Botón "Exportar PNG" genera la imagen correctamente.
--  La imagen contiene título, texto original y traducción Braille.
--  El nombre del archivo incluye timestamp.
--  La imagen tiene alta calidad (scale: 2).
--  Feedback visual correcto durante la generación.
--  Validación de campo vacío funciona (muestra alerta).
--  La librería html2canvas se carga correctamente desde CDN.
+
+- Botón "Exportar PNG" genera la imagen correctamente.
+- La imagen contiene título, texto original y traducción Braille.
+- El nombre del archivo incluye timestamp.
+- La imagen tiene alta calidad (scale: 2).
+- Feedback visual correcto durante la generación.
+- Validación de campo vacío funciona (muestra alerta).
+- La librería html2canvas se carga correctamente desde CDN.
 
 #### Interfaz de Usuario
--  UI muestra y copia correctamente el resultado.
--  Botones tienen estados hover correctos.
--  Diseño responsivo funciona en móviles y tablets.
--  Botones se apilan verticalmente en pantallas pequeñas.
--  Iconos y textos de botones son claros y descriptivos.
+
+- UI muestra y copia correctamente el resultado.
+- Botones tienen estados hover correctos.
+- Diseño responsivo funciona en móviles y tablets.
+- Botones se apilan verticalmente en pantallas pequeñas.
+- Iconos y textos de botones son claros y descriptivos.

@@ -20,75 +20,70 @@ La aplicación se iniciará en modo desarrollo y podrás acceder a ella en:
 Interfaz Web
 ------------
 
-Conversión de Texto
-^^^^^^^^^^^^^^^^^^^
+La interfaz cuenta ahora con dos pestañas principales: **Texto → Braille** (por defecto) y **Braille → Texto**.
 
-La interfaz web de BraiLator ofrece conversión en tiempo real:
+Pestaña: Texto → Braille
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Abre tu navegador y ve a http://localhost:5000
-2. Escribe o pega el texto que deseas convertir en el área de entrada
-3. **La conversión es automática e instantánea** - no necesitas hacer clic en ningún botón
-4. El texto en Braille aparece inmediatamente en la sección "Resultado en Braille"
+1. Escribe o pega el texto que deseas convertir en el área de entrada.
+2. **La conversión es automática e instantánea**.
+3. El texto en Braille aparece inmediatamente en la sección de salida con una animación de cursor.
 
-.. note::
-   La conversión ocurre mientras escribes. Cada carácter se traduce instantáneamente.
+Pestaña: Braille → Texto
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Esta nueva funcionalidad permite escribir en Braille y ver la traducción en texto normal.
+
+**Métodos de Entrada:**
+
+1. **Casillas Interactivas (Virtual Braille):**
+   Haz clic en los 6 puntos (check-boxes) para formar un carácter y presiona "Enter" o usa los controles.
+
+2. **Teclado Numérico (Numpad Mapping):**
+   Puedes usar tu teclado físico para simular un teclado Braille:
+   
+   * **7:** Punto 1 (Arriba Izq)
+   * **8:** Punto 4 (Arriba Der)
+   * **4:** Punto 2 (Medio Izq)
+   * **5:** Punto 5 (Medio Der)
+   * **1:** Punto 3 (Abajo Izq)
+   * **2:** Punto 6 (Abajo Der)
+   * **Enter:** Confirmar carácter
+
+3. **Modos de Escritura:**
+   
+   * **Modo Letra (Tecla 9):** Para escribir alfabeto estándar.
+   * **Modo Número (Tecla 6):** Activa el modo numérico (agrega prefijo numérico automáticamente).
+   * **Modo Carácter (Tecla 3):** Para símbolos especiales y puntuación.
+
+Esta sección incluye validación en tiempo real para asegurar que el carácter formado existe en el diccionario.
 
 Funcionalidades Adicionales
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+💾 **Descargar Word Braille (Espejo)**
+""""""""""""""""""""""""""""""""""""""
+
+Esta función es vital para la impresión manual (punzón y regleta) o máquinas Perkins.
+
+1. Ve a la sección de descargas.
+2. Haz clic en "Descargar Word Braille (Espejo)".
+3. Se generará un documento ``.docx`` con:
+   
+   * Instrucciones de perforado.
+   * El texto Braille invertido horizontalmente (espejo) y escrito de derecha a izquierda.
+   * Una página de referencia con el texto original.
+
+**¿Por qué espejo?** Al perforar el papel por el reverso, el relieve se forma hacia el frente. Por tanto, se debe escribir al revés para que se lea al derecho.
+
 📋 **Copiar al Portapapeles**
+"""""""""""""""""""""""""""""
 
-El botón "📋 Copiar" copia el texto en Braille al portapapeles:
-
-1. Una vez que tienes texto convertido, haz clic en "📋 Copiar"
-2. El botón cambiará a "✅ ¡Copiado!" con fondo verde durante 2 segundos
-3. Ahora puedes pegar (Ctrl+V) el texto Braille en cualquier aplicación
-
-**Validación:**
-   Si no hay texto, mostrará la alerta: "⚠️ No hay texto en Braille para copiar"
+El botón "Copiar" (en la pestaña Texto → Braille) permite llevar el resultado a otras aplicaciones rápidamente.
 
 🖼️ **Exportar como Imagen PNG**
-
-El botón "🖼️ Exportar PNG" genera una imagen profesional:
-
-1. Con texto ya convertido, haz clic en "🖼️ Exportar PNG"
-2. Verás "⏳ Generando..." mientras se procesa
-3. Se descarga automáticamente: ``braille-traduccion-YYYY-MM-DD-HH-MM-SS.png``
-4. El botón mostrará "✅ ¡Exportado!" brevemente
-
-**Contenido de la imagen PNG:**
-
-* Título: "Traducción a Braille"
-* Texto original
-* Traducción en Braille (fuente 32px)
-* Footer: "Generado por BraiLator"
-* Fondo blanco profesional
-
-**Casos de uso:**
-
-* Material educativo
-* Señalética en Braille
-* Presentaciones y documentación
-* Compartir en redes sociales
-* Impresión de referencias
-
-**Validación:**
-   Sin texto mostrará: "⚠️ No hay texto en Braille para exportar"
-
-Navegación
-^^^^^^^^^^
-
-**Secciones disponibles:**
-
-* **Inicio** (``/``): Conversor principal
-* **Contexto** (``/contexto``): Información sobre Braille
-* **Sobre Nosotros** (``/sobre-nosotros``): Equipo de desarrollo
-
-Atajos de Teclado
-^^^^^^^^^^^^^^^^^
-
-* **Escritura continua**: La conversión es automática, simplemente escribe
-
+"""""""""""""""""""""""""""""""
+Genera una imagen compartible con diseño profesional que incluye el texto original y su traducción.
 
 Ejemplos de Uso
 ---------------

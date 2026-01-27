@@ -10,15 +10,24 @@ Descripción General
 -------------------
 
 Este módulo contiene la aplicación Flask principal para el conversor de texto a Braille.
-Implementa la lógica de conversión y expone tanto una interfaz web como una API REST.
+Implementa la lógica de conversión bidireccional (Texto ↔ Braille) y expone tanto una interfaz web como una API REST.
 
-Función Principal de Conversión
----------------------------------
+Funciones de Utilidad
+---------------------
+
+.. autofunction:: app.espejo_braille
+
+Invierte los puntos de los caracteres Braille y el orden de la cadena para generar un formato "espejo".
+Esto es fundamental para imprimir/perforar por el reverso de la hoja y que se lea correctamente por el frente.
+
+**Proceso:**
+
+1. Invierte cada carácter Braille horizontalmente (intercambia columnas de puntos 1↔4, 2↔5, 3↔6).
+2. Invierte el orden de los caracteres (de derecha a izquierda).
 
 .. autofunction:: app.texto_a_braille
 
-La función ``texto_a_braille`` es el núcleo del sistema. Convierte texto en español
-(incluyendo mayúsculas, números, tildes y caracteres especiales) a símbolos Braille Unicode.
+La función ``texto_a_braille`` convierte texto en español (incluyendo mayúsculas, números, tildes y caracteres especiales) a símbolos Braille Unicode.
 
 **Características:**
 
@@ -26,35 +35,28 @@ La función ``texto_a_braille`` es el núcleo del sistema. Convierte texto en es
 * Manejo de vocales acentuadas (á, é, í, ó, ú, ü)
 * Conversión de mayúsculas con prefijo ``⠨`` (puntos 4-6)
 * Números con prefijo ``⠼`` (puntos 3-4-5-6)
-* Números decimales (con punto o coma)
 * Signos de puntuación y operadores matemáticos
-* Preservación de saltos de línea
 
-**Ejemplo de uso:**
+.. autofunction:: app.braille_a_texto
 
-.. code-block:: python
+Convierte una cadena de caracteres Braille Unicode a texto legible. Interpreta los prefijos de número (``⠼``) y mayúscula (``⠨``) para decodificar correctamente el contexto.
 
-    >>> texto_a_braille("Hola")
-    '⠨⠓⠕⠇⠁'
-    
-    >>> texto_a_braille("año 2024")
-    '⠁⠻⠕⠀⠼⠃⠚⠃⠙'
-    
-    >>> texto_a_braille("precio: 19.99")
-    '⠏⠗⠑⠉⠊⠕⠒⠀⠼⠁⠊⠄⠊⠊'
+**Lógica:**
+
+* Mantiene un estado para saber si está en modo numérico.
+* Aplica mayúsculas al siguiente carácter cuando encuentra el prefijo correspondiente.
+* Traduce secuencias vacías o espacios.
 
 Rutas de la Aplicación Web
 ---------------------------
 
 .. autofunction:: app.index
 
-Ruta principal que renderiza la interfaz web del conversor.
+Ruta principal que renderiza la interfaz web.
 
 **URL:** ``/``
 
 **Método:** ``GET``
-
-**Retorna:** Plantilla HTML con la interfaz de usuario
 
 .. autofunction:: app.contexto
 
@@ -64,8 +66,6 @@ Página informativa sobre el contexto del proyecto.
 
 **Método:** ``GET``
 
-**Retorna:** Plantilla HTML con información contextual
-
 .. autofunction:: app.sobre_nosotros
 
 Página con información sobre el equipo de desarrollo.
@@ -74,45 +74,40 @@ Página con información sobre el equipo de desarrollo.
 
 **Método:** ``GET``
 
-**Retorna:** Plantilla HTML con información del equipo
-
 API REST
 --------
 
 .. autofunction:: app.convertir
 
-Endpoint REST para convertir texto a Braille mediante peticiones POST.
+Endpoint para convertir **Texto → Braille**.
 
 **URL:** ``/convertir``
-
 **Método:** ``POST``
+**Body:** ``{"texto": "..."}``
 
-**Content-Type:** ``application/json``
+.. autofunction:: app.convertir_braille
 
-**Request Body:**
+Endpoint para convertir **Braille → Texto**.
 
-.. code-block:: json
+**URL:** ``/convertir-braille``
+**Método:** ``POST``
+**Body:** ``{"braille": "..."}``
 
-    {
-        "texto": "hola mundo"
-    }
+.. autofunction:: app.validar_braille
 
-**Response (200 OK):**
+Valida si un carácter Braille introducido es válido según el modo actual (letra, número, especial). Útil para la entrada interactiva en la UI.
 
-.. code-block:: json
+**URL:** ``/validar-braille``
+**Método:** ``POST``
+**Body:** ``{"braille": "...", "modo": "letra|numero|especial"}``
 
-    {
-        "texto_original": "hola mundo",
-        "texto_braille": "⠓⠕⠇⠁⠀⠍⠥⠝⠙⠕"
-    }
+.. autofunction:: app.descargar_braille_word
 
-**Response (400 Bad Request):**
+Genera y descarga un documento de Microsoft Word (.docx) con el texto Braille formateado en espejo, listo para imprimir y perforar.
 
-.. code-block:: json
-
-    {
-        "error": "No se proporcionó texto"
-    }
+**URL:** ``/descargar-braille-word``
+**Método:** ``POST``
+**Body:** ``{"braille": "...", "texto": "..."}``
 
 Variables Globales y Constantes
 --------------------------------
@@ -154,27 +149,12 @@ Variables Globales y Constantes
    Prefijo para indicar números (puntos 3-4-5-6).
    Se coloca al inicio de cada secuencia numérica.
 
-Detalles de Implementación
----------------------------
+.. py:data:: BRAILLE_TO_TEXT
+   :type: dict
 
-**Algoritmo de Conversión:**
+   Diccionario inverso generado a partir de ``BRAILLE_MAP`` para la decodificación.
 
-1. Recorre el texto carácter por carácter
-2. Detecta secuencias numéricas y las agrupa
-3. Agrega prefijos de mayúscula cuando corresponde
-4. Maneja puntos y comas dentro de números (decimales)
-5. Mapea caracteres según ``BRAILLE_MAP``
-6. Preserva caracteres desconocidos sin cambios
+.. py:data:: BRAILLE_TO_NUMBER
+   :type: dict
 
-**Manejo de Números:**
-
-Los números se procesan en bloques. El prefijo ``⠼`` se agrega una sola vez
-al inicio de cada secuencia numérica, no antes de cada dígito.
-
-Ejemplo: ``"123"`` → ``"⠼⠁⠃⠉"`` (no ``"⠼⠁⠼⠃⠼⠉"``)
-
-**Manejo de Mayúsculas:**
-
-Cada letra mayúscula recibe su propio prefijo ``⠨``.
-
-Ejemplo: ``"HOLA"`` → ``"⠨⠓⠨⠕⠨⠇⠨⠁"``
+   Diccionario inverso para decodificar números Braille.
