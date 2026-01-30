@@ -68,13 +68,15 @@ Abre `http://localhost:5000` en tu navegador.
 
 Al iniciar el servicio web, verás la nueva interfaz con pestañas:
 
-![Dashboard de la aplicacion](../Documentation/DashbordBraille.png)
+![Dashboard de la aplicacion](../Documentation/home.png)
 
 ### Pestaña: Texto → Braille (Traductor)
 
 1. **Escribir o pegar texto**: Introduce el texto que deseas convertir en el área de entrada.
 2. **Conversión automática**: La traducción a Braille se realiza instantáneamente mientras escribes.
 3. **Visualización**: El resultado aparece abajo con una animación de cursor.
+
+![Traduccion Texto Braille](../Documentation/PruebaTB.png)
 
 ### Pestaña: Braille → Texto (Nuevo)
 
@@ -92,7 +94,7 @@ Esta sección permite la entrada inversa:
    - **Modo Número**: Valida dígitos numéricos.
    - **Modo Carácter**: Para signos especiales.
 
-![Demostración](../Documentation/MuestraBraile.png)
+![Traduccion Braille Texto](../Documentation/PruebaBT.png)
 
 ### Funcionalidades Adicionales
 

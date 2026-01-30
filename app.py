@@ -10,20 +10,34 @@ app = Flask(__name__, static_folder='static')
 # ================= DICCIONARIOS BRAILLE =================
 
 BRAILLE_MAP = {
-
+    # Letras básicas
     'a': '⠁','b': '⠃','c': '⠉','d': '⠙','e': '⠑',
     'f': '⠋','g': '⠛','h': '⠓','i': '⠊','j': '⠚',
     'k': '⠅','l': '⠇','m': '⠍','n': '⠝','o': '⠕',
     'p': '⠏','q': '⠟','r': '⠗','s': '⠎','t': '⠞',
     'u': '⠥','v': '⠧','w': '⠺','x': '⠭','y': '⠽',
     'z': '⠵',
+    # Letra especial español
     'ñ': '⠻',
+    # Vocales con tilde
     'á': '⠷','é': '⠮','í': '⠌','ó': '⠬','ú': '⠾',
     'ü': '⠳',
+    # Espacio
     ' ': '⠀',
-    '.': '⠄', ',': '⠂', ';': '⠆', ':': '⠒',
-    '!': '⠖', '?': '⠦', '-': '⠤',
-    '\n': '\n'
+    # Puntuación básica
+    '.': '⠄', ',': '⠂', ';': '⠆', ':': '⠒', '-': '⠤',
+    # Signos de interrogación (español tiene apertura y cierre)
+    '¿': '⠢', # Apertura de interrogación (puntos 2-6)
+    '?': '⠦', # Cierre de interrogación (puntos 2-3-6)
+    # Signos de exclamación (español tiene apertura y cierre)
+    '¡': '⠖', # Apertura de exclamación (puntos 2-3-5)
+    '!': '⠴', # Cierre de exclamación (puntos 2-3-4-5)
+    # Otros signos
+    '(': '⠣', ')': '⠜',
+    '"': '⠦', "'": '⠄',
+    '/': '⠸', '\\': '⠳',
+    # Salto de línea
+    '\n': '\n',
 }
 
 BRAILLE_NUMBERS = {
@@ -34,7 +48,13 @@ BRAILLE_NUMBERS = {
 SIGNO_MAYUSCULA = '⠨'
 SIGNO_NUMERO = '⠼'
 
-BRAILLE_TO_TEXT = {v: k for k, v in BRAILLE_MAP.items()}
+# Crear diccionarios inversos con manejo especial para valores duplicados
+BRAILLE_TO_TEXT = {}
+for k, v in BRAILLE_MAP.items():
+    if v not in BRAILLE_TO_TEXT:
+        BRAILLE_TO_TEXT[v] = k
+    # Si hay duplicados, mantener el primero que se añadió
+
 BRAILLE_TO_NUMBER = {v: k for k, v in BRAILLE_NUMBERS.items()}
 
 # ================= FUNCIÓN DE ESPEJO BRAILLE =================
@@ -106,6 +126,8 @@ def texto_a_braille(texto):
                 resultado.append(SIGNO_MAYUSCULA + BRAILLE_MAP[c.lower()])
             elif c.lower() in BRAILLE_MAP:
                 resultado.append(BRAILLE_MAP[c.lower()])
+            elif c in BRAILLE_MAP:  # Para signos que no tienen versión en mayúscula/minúscula
+                resultado.append(BRAILLE_MAP[c])
             else:
                 resultado.append(c)
 
