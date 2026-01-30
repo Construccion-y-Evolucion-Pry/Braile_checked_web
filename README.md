@@ -25,15 +25,17 @@
 ### ✅ Funcionalidades Avanzadas
 - **Modos de Validación**: Letra (9), Número (6) y Carácter Especial (3)
 - **Entrada por Teclado**: Mapeo del numpad al patrón Braille 2×3
-- **Botón Block Mayús**: Sincronización con la tecla física Bloq Mayús
+- **Botón Block Mayús**: Sincronización automática con la tecla física Bloq Mayús
+- **Tour Interactivo**: Guía visual paso a paso del mapeo de teclas y funcionalidades principales
 - **Exportación a Word**: Formato espejo para perforación manual desde el reverso del papel
-- **Tour Interactivo**: Guía visual del mapeo de teclas y funcionalidades
+- **Validación Contextual**: Verificación en tiempo real según el modo activo
 
 ### ✅ Accesibilidad y Diseño
 - Interfaz responsive (móvil, tablet, desktop)
 - Tipografía grande (32px) para visualización de Braille
 - Validación contextual en tiempo real
 - Mensajes de error claros y descriptivos
+- Sistema de notificaciones visuales para feedback inmediato
 
 ---
 
@@ -96,29 +98,109 @@ Abrir en el navegador: `http://localhost:5000`
 
 ### Pestaña: Braille → Texto
 
-1. **Seleccionar modo**:
-   - **Modo Letra (9)**: Para escritura normal
-   - **Modo Número (6)**: Añade automáticamente el prefijo numérico
-   - **Modo Carácter (3)**: Para signos de puntuación
+#### 🎓 Tour Interactivo (¡NUEVO!)
 
-2. **Entrada de caracteres**:
-   - **Casillas interactivas**: Marcar los 6 puntos Braille manualmente
-   - **Teclado numpad**: Usar el mapeo 7-8 (puntos 1-4), 4-5 (puntos 2-5), 1-2 (puntos 3-6)
-   - **Pegar Unicode**: Introducir directamente caracteres Braille copiados
+Antes de comenzar, haz clic en el botón **"Tour ❓"** en el menú de navegación para acceder a una guía interactiva que muestra:
 
-3. **Confirmar**: Presionar `Enter` para agregar el carácter a la palabra
+- **Mapeo visual del teclado numpad** a los 6 puntos Braille
+- **Distribución espacial** del patrón 2×3
+- **Instrucciones de uso** con ejemplos prácticos
+- **Atajos de teclado** disponibles
 
-4. **Descargar**:
-   - **Descargar Texto (.txt)**: Archivo plano con la traducción
-   - **Descargar Word Braille (Espejo)**: Formato `.docx` optimizado para perforación manual
+El Tour resalta visualmente las casillas Braille y muestra un tooltip con la siguiente información:
 
-### Atajos de Teclado
+```
+⌨️ Mapeo de Teclado (Numpad)
+Usa tu teclado numérico para marcar los puntos:
 
-- **9**: Activar modo Letra
-- **6**: Activar modo Número
-- **3**: Activar modo Carácter Especial
-- **Enter**: Confirmar y agregar carácter
-- **Escape**: Limpiar entrada y reiniciar
+7 ➝ ●1    8 ➝ ●4
+4 ➝ ●2    5 ➝ ●5
+1 ➝ ●3    2 ➝ ●6
+
+El punto 1 comienza arriba a la izquierda.
+```
+
+#### 1. Seleccionar modo
+
+- **Modo Letra (9)**: Para escritura normal de letras y símbolos básicos
+- **Modo Número (6)**: Añade automáticamente el prefijo numérico (⠼)
+- **Modo Carácter (3)**: Para signos de puntuación y caracteres especiales
+
+💡 **Tip**: Los números entre paréntesis son atajos de teclado
+
+#### 2. Entrada de caracteres
+
+**Opción A: Casillas interactivas**
+- Marcar manualmente los 6 puntos Braille según el patrón 2×3
+- Las casillas se organizan como:
+  ```
+  ●1  ●4
+  ●2  ●5
+  ●3  ●6
+  ```
+
+**Opción B: Teclado numpad** (recomendado)
+- Usar el teclado numérico para marcar/desmarcar puntos:
+  ```
+  Tecla 7 → Punto 1 (arriba izquierda)
+  Tecla 4 → Punto 2 (medio izquierda)
+  Tecla 1 → Punto 3 (abajo izquierda)
+  Tecla 8 → Punto 4 (arriba derecha)
+  Tecla 5 → Punto 5 (medio derecha)
+  Tecla 2 → Punto 6 (abajo derecha)
+  ```
+
+**Opción C: Pegar Unicode**
+- Introducir directamente caracteres Braille copiados desde otra fuente
+
+#### 3. Botón Block Mayús (🔠 NUEVO)
+
+El botón **"Block Mayus"** permite activar el modo de mayúsculas para escritura de nombres propios, siglas o texto en mayúsculas:
+
+- **Ubicación**: A la izquierda de las casillas Braille
+- **Funcionamiento**: 
+  - Clic manual para activar/desactivar
+  - **Sincronización automática** con la tecla física Bloq Mayús del teclado
+  - Solo funciona en **Modo Letra** (se desactiva automáticamente en otros modos)
+- **Indicador visual**: 
+  - Inactivo: Gris oscuro
+  - Activo: Rojo brillante con borde destacado
+- **Efecto**: Añade el prefijo de mayúscula (⠨) antes de cada letra
+
+**Ejemplo de uso**:
+```
+1. Activar Block Mayús (botón rojo)
+2. Escribir "m" → Se guarda como "⠨⠍" (M)
+3. Escribir "a" → Se guarda como "⠁" (a minúscula)
+```
+
+#### 4. Confirmar caracteres
+
+- **Presionar `Enter`** para agregar el carácter a la palabra
+- El sistema valida automáticamente según el modo activo
+- Si el carácter no es válido, aparece un mensaje de error descriptivo
+
+#### 5. Descargar resultados
+
+- **Descargar Texto (.txt)**: Archivo plano con la traducción
+- **Descargar Word Braille (Espejo)**: Formato `.docx` optimizado para perforación manual
+
+---
+
+### ⌨️ Atajos de Teclado (Pestaña Braille → Texto)
+
+| Tecla | Función |
+|-------|---------|
+| **9** | Activar Modo Letra |
+| **6** | Activar Modo Número (añade prefijo ⠼) |
+| **3** | Activar Modo Carácter Especial |
+| **7, 4, 1** | Marcar puntos Braille (columna izquierda: 1, 2, 3) |
+| **8, 5, 2** | Marcar puntos Braille (columna derecha: 4, 5, 6) |
+| **Enter** | Confirmar y agregar carácter |
+| **Escape** | Limpiar entrada y reiniciar (vuelve a Modo Letra) |
+| **Bloq Mayús** | Sincroniza con botón Block Mayús (solo en Modo Letra) |
+
+💡 **Nota**: Los atajos de teclado solo funcionan cuando la pestaña "Braille → Texto" está activa.
 
 ---
 
@@ -132,13 +214,13 @@ Braile_checked_web/
 ├── test_braille.py               # Suite de 70 casos de prueba (unittest)
 │
 ├── templates/                    # Plantillas HTML
-│   ├── index.html               # Traductor bidireccional
+│   ├── index.html               # Traductor bidireccional con Tour
 │   ├── contexto.html            # Información sobre Braille
 │   └── sobre-nosotros.html      # Acerca del proyecto
 │
 ├── static/
 │   └── css/
-│       └── style.css            # Estilos CSS personalizados
+│       └── style.css            # Estilos CSS (incluye estilos del Tour)
 │
 ├── Documentation/                # Documentación Sphinx
 │   ├── source/                  # Archivos fuente (.rst)
@@ -311,9 +393,19 @@ Las contribuciones son bienvenidas. Para colaborar:
 
 ## 📚 Aprendizajes del Proyecto
 
-Durante el desarrollo de **BraiLator** aprendimos la importancia de considerar las necesidades reales de los usuarios finales desde las etapas tempranas del diseño. Un ejemplo clave fue la implementación del botón "Block Mayús" en la interfaz de entrada Braille: inicialmente no lo habíamos contemplado, pero al analizar el flujo de escritura, comprendimos que era esencial para facilitar la entrada de nombres propios y siglas. 
+Durante el desarrollo de **BraiLator** aprendimos la importancia de considerar las necesidades reales de los usuarios finales desde las etapas tempranas del diseño. 
 
-Asimismo, entendimos que las personas con discapacidad visual identifican los patrones Braille mediante la disposición táctil de los puntos en un rectángulo de 2×3, lo que nos llevó a optimizar tanto la representación visual como la lógica de validación contextual (modo letra, número y carácter especial). Este proyecto reforzó la necesidad de diseñar con empatía, validar continuamente con casos de uso reales y documentar exhaustivamente cada decisión técnica para garantizar la mantenibilidad y escalabilidad del sistema.
+**Ejemplos clave de iteración centrada en el usuario**:
+
+1. **Botón Block Mayús**: Inicialmente no contemplado, surgió al analizar el flujo de escritura real. Las personas necesitan escribir nombres propios y siglas, por lo que la sincronización automática con la tecla física se volvió esencial.
+
+2. **Tour Interactivo**: Al observar que los usuarios nuevos no entendían intuitivamente el mapeo del numpad, desarrollamos una guía visual contextual que reduce significativamente la curva de aprendizaje.
+
+3. **Validación Contextual**: Implementamos tres modos distintos (letra, número, carácter) porque comprendimos que las personas con discapacidad visual identifican los patrones Braille mediante la disposición táctil específica de puntos en un rectángulo de 2×3.
+
+4. **Exportación en Espejo**: La funcionalidad de invertir el Braille para perforación manual surgió de entender el proceso físico real de creación de material táctil.
+
+Este proyecto reforzó la necesidad de **diseñar con empatía**, validar continuamente con casos de uso reales y documentar exhaustivamente cada decisión técnica para garantizar la mantenibilidad y escalabilidad del sistema.
 
 ---
 
