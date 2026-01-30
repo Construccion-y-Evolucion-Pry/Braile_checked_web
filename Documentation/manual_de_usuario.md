@@ -65,45 +65,62 @@ python app.py
 Abre `http://localhost:5000` en tu navegador.
 
 ## Uso — Interfaz Web
-Al iniciar el servicio web, se vera la siguiente pantalla: 
 
-![Dashboard de la aplicacion](../Documentation/DashbordBraille.png)
+Al iniciar el servicio web, verás la nueva interfaz con pestañas:
 
-### Conversión de Texto
+![Dashboard de la aplicacion](../Documentation/home.png)
+
+### Pestaña: Texto → Braille (Traductor)
 
 1. **Escribir o pegar texto**: Introduce el texto que deseas convertir en el área de entrada.
 2. **Conversión automática**: La traducción a Braille se realiza instantáneamente mientras escribes.
-3. **Visualización del resultado**: El texto convertido aparece en la sección "Resultado en Braille".
+3. **Visualización**: El resultado aparece abajo con una animación de cursor.
 
-![Demostración](../Documentation/MuestraBraile.png)
+![Traduccion Texto Braille](../Documentation/PruebaTB.png)
+
+### Pestaña: Braille → Texto (Nuevo)
+
+Esta sección permite la entrada inversa:
+
+1. **Entrada Interactiva**: Usa las casillas de verificación (6 puntos) para formar caracteres.
+2. **Teclado Braille Virtual**:
+   - Usa tu teclado numérico (Numpad) para activar los puntos:
+     - 7, 8 (Puntos 1, 4)
+     - 4, 5 (Puntos 2, 5)
+     - 1, 2 (Puntos 3, 6)
+   - Presiona `Enter` para confirmar el carácter.
+3. **Modos de Validación**:
+   - **Modo Letra**: Para escritura normal.
+   - **Modo Número**: Valida dígitos numéricos.
+   - **Modo Carácter**: Para signos especiales.
+
+![Traduccion Braille Texto](../Documentation/PruebaBT.png)
 
 ### Funcionalidades Adicionales
 
+#### 💾 Descargar Word Braille (Formato Espejo)
+
+Ideal para impresión y perforado manual:
+
+- Haz clic en **"Descargar Word Braille (Espejo)"**.
+- Recibirás un archivo `.docx` con el texto invertido horizontalmente.
+- **Instrucciones**: Imprime, voltea la hoja y perfora los puntos desde atrás. Al girarla, se leerá correctamente.
+
 #### 📋 Copiar Texto en Braille
 
-- Haz clic en el botón **"📋 Copiar"** ubicado en la parte superior del área de resultado.
-- El texto en Braille se copiará automáticamente al portapapeles.
-- Verás una confirmación visual: el botón cambiará a "✅ ¡Copiado!" durante 2 segundos.
-- Ahora puedes pegar el texto Braille en cualquier otra aplicación (Ctrl+V).
+- Haz clic en el botón **"Copiar Texto"** (si está disponible) o selecciona el texto resultante.
+- En la pestaña Braille → Texto, hay botones específicos para descargar el resultado en `.txt`.
 
 #### 🖼️ Exportar como Imagen PNG
 
-- Haz clic en el botón **"🖼️ Exportar PNG"** junto al botón de copiar.
-- El sistema generará automáticamente una imagen profesional que incluye:
-  - Título "Traducción a Braille"
-  - Tu texto original
-  - La traducción en símbolos Braille (fuente grande y legible)
-  - Marca de agua "Generado por BraiLator"
-- La imagen se descargará automáticamente con el nombre: `braille-traduccion-[fecha-hora].png`
-- El formato PNG permite alta calidad y es ideal para imprimir o compartir.
+- Haz clic en el botón de exportar imagen (si aplica en la vista actual).
+- Genera una imagen limpia con el texto y su traducción.
 
-**Casos de uso para exportar PNG:**
+**Casos de uso para exportar:**
+
 - Crear material educativo
-- Generar señalética en Braille
-- Compartir traducciones en redes sociales
-- Documentar conversiones para proyectos
-- Imprimir referencias de Braille
-
+- Generar plantillas de perforado
+- Compartir traducciones rápidas
 
 ## Accesibilidad
 
@@ -115,15 +132,18 @@ Al iniciar el servicio web, se vera la siguiente pantalla:
 ## Solución de Problemas
 
 ### No se puede copiar el texto
+
 - Asegúrate de que tu navegador tiene permisos para acceder al portapapeles.
 - Prueba con otro navegador moderno (Chrome, Firefox, Edge).
 
 ### No se descarga la imagen PNG
+
 - Verifica que tu navegador permite descargas automáticas.
 - Revisa la carpeta de descargas de tu sistema.
 - Asegúrate de tener conexión a internet (para cargar la librería html2canvas).
 
 ### El texto en Braille no se ve correctamente
+
 - Actualiza tu navegador a la última versión.
 - Asegúrate de que tu sistema tiene fuentes Unicode instaladas.
 
@@ -131,5 +151,3 @@ Al iniciar el servicio web, se vera la siguiente pantalla:
 
 - Para grandes volúmenes de texto, considerar paginar la conversión o procesar por lotes.
 - Validar entrada en aplicaciones que usen la API para evitar strings muy largos o maliciosos.
-
-
